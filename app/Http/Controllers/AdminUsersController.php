@@ -33,15 +33,14 @@ class AdminUsersController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    /*
+     *Stores a newly created user to the DB and then redirects tto the user page
+     * on Admin where the user will be visible.
      */
     public function store(StoreUserRequest $request)
     {
-        return $request->all();
+        User::create($request->all());
+        return redirect('/admin/users');
     }
 
     /**
