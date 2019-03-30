@@ -23,4 +23,15 @@ Route::get('/admin', function (){
     return view('admin.index');
 });
 
-Route::resource('admin/users', 'AdminUsersController');
+/*
+* Route with middleware to allow only admins to see admin/users page
+*/
+Route::group(['middleware'=>'admin'], function (){
+
+    Route::resource('admin/users', 'AdminUsersController');
+
+});
+
+
+
+
