@@ -25,7 +25,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role ? $user->role->name : 'No Role Assigned'}}</td>
-                    <td>{{$user->is_active == 1 ? 'Active' : 'Inactive'}}</td>
+                    <td>{{$user->is_active == 0 ? 'Inactive' : 'Active'}}</td>
                     <td><button type="button" class="btn btn-success"><a href="{{route('admin.users.edit', $user->id)}}">Edit</a></button></td>
                     </tr>
                 @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Role;
 use App\User;
@@ -35,7 +36,13 @@ class AdminUsersController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        User::create($request->all());
+
+        $input = $request->all();
+
+        $input['password'] = bcrypt($request->password);
+
+        User::create($input);
+
         return redirect('/admin/users');
     }
 
@@ -64,15 +71,29 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update the user details in the database
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        /*Check to see if the password section is blank and if it is, persist
+        * everything except password to DB. If it is not blank persist all.
+        */
+        if(trim($request->password)== ''){
+
+            $input = $request->except('password');
+
+        } else{
+
+            $input = $request->all();
+
+            $input['password'] = bcrypt($request->password);
+        }
+
+        $user->update($input);
+
+        return redirect('/admin/users');
     }
 
     /**

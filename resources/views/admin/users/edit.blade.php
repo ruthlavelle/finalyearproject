@@ -33,12 +33,12 @@
 
     <div class="form-group">
         {!! Form::label('is_active', 'Status:') !!}
-        {!! Form::select('is_active', array(1 => 'Active', 0 => 'Inactive'), null, ['class'=>'form-control']) !!}
+        {!! Form::select('is_active', array(0 => 'Inactive', 1 => 'Active'), null, ['class'=>'form-control']) !!}
     </div>
 
     {{--Submit button--}}
     <div class="form-group">
-        {!! Form::submit('Create User', ['class'=>'btn-btn-primary']) !!}
+        {!! Form::submit('Update User', ['class'=>'btn-btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

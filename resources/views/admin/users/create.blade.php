@@ -30,6 +30,11 @@
         {!! Form::password('password', ['class'=>'form-control']) !!}
     </div>
 
+    {{--}}<div class="form-group">
+        {!! Form::label('is_active', 'Status:') !!}
+        {!! Form::select('is_active', array(0=>'Inactive', 1=>'Active'), null, ['class'=>'form-control']) !!}
+    </div>--}}
+
     {{--Submit button--}}
     <div class="form-group">
        {!! Form::submit('Create User', ['class'=>'btn-btn-primary']) !!}
