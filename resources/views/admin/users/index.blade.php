@@ -13,6 +13,7 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Status</th>
+            <th scope="col"></th>
         </tr>
         </thead>
 
@@ -23,8 +24,9 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->role->name}}</td>
+                    <td>{{$user->role ? $user->role->name : 'No Role Assigned'}}</td>
                     <td>{{$user->is_active == 1 ? 'Active' : 'Inactive'}}</td>
+                    <td><button type="button" class="btn btn-success"><a href="{{route('admin.users.edit', $user->id)}}">Edit</a></button></td>
                     </tr>
                 @endforeach
                 @endif

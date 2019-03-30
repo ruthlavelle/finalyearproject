@@ -12,9 +12,7 @@ use App\Http\Requests;
 class AdminUsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Displays a list of users
      */
     public function index()
     {
@@ -23,9 +21,7 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new user
      */
     public function create()
     {
@@ -56,13 +52,15 @@ class AdminUsersController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        /*Brings in data from roles table */
+        $roles = Role::lists('name', 'id')->all();
+
+        return view('admin.users.edit', compact('user','roles'));
     }
 
     /**
