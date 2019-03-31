@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -38,6 +39,8 @@ class AdminUsersController extends Controller
     {
 
         $input = $request->all();
+
+        Session::flash('user_created', 'New User Created');
 
         $input['password'] = bcrypt($request->password);
 
@@ -77,6 +80,8 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
 
+        Session::flash('user_updated', 'User has been updated');
+
         /*Check to see if the password section is blank and if it is, persist
         * everything except password to DB. If it is not blank persist all.
         */
@@ -97,13 +102,14 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Deletes a user from the database
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+
+        Session::flash('user_deleted', 'User Deleted');
+
+        return redirect('/admin/users');
     }
 }

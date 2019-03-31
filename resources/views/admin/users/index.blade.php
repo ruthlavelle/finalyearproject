@@ -3,6 +3,25 @@
 
 
 @section('content')
+
+    @if(Session::has('user_updated'))
+
+        <b><p class="bg-success" align="center">{{session('user_updated')}}</p></b>
+
+    @endif
+
+    @if(Session::has('user_created'))
+
+        <b><p class="bg-success" align="center">{{session('user_created')}}</p></b>
+
+    @endif
+
+    @if(Session::has('user_deleted'))
+
+        <b><p class="bg-danger" align="center">{{session('user_deleted')}}</p></b>
+
+    @endif
+
     <h1>Users</h1>
 
     <table class="table table-hover">
@@ -25,8 +44,11 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role ? $user->role->name : 'No Role Assigned'}}</td>
-                    <td>{{$user->is_active == 0 ? 'Inactive' : 'Active'}}</td>
-                    <td><button type="button" class="btn btn-success"><a href="{{route('admin.users.edit', $user->id)}}">Edit</a></button></td>
+                        <td>{{$user->is_active == 0 ? 'Inactive' : 'Active'}}</td>
+                        <td><a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-success">Edit User</a></td>
+                        <td> {!! Form::open(['method'=>'DELETE', 'action' => ['AdminUsersController@destroy', $user->id ]]) !!}
+                        {!! Form::submit('Delete User', ['class'=>'btn btn-danger']) !!}
+                            {!! Form::close() !!} </td>
                     </tr>
                 @endforeach
                 @endif
