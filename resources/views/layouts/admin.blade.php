@@ -107,11 +107,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{route('admin.projects.index')}}">All Projects</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{route('admin.projects.create')}}">Create a Project</a>
                             </li>
 
                         </ul>
