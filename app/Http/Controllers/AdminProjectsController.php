@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
 use App\Project;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class AdminProjectsController extends Controller
 {
@@ -37,9 +39,15 @@ class AdminProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $user->projects()->create($input);
+
+        return redirect('/admin/projects');
     }
 
     /**

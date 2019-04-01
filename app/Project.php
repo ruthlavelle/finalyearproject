@@ -25,4 +25,9 @@ class Project extends Model
         'priority_id',
         'closure_date'
     ];
+
+    public function user(){
+
+        return $this->belongsTo('App\User');
+    }
 }
