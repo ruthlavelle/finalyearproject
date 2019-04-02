@@ -38,14 +38,14 @@
 
     {{--Strategic Driver Field - can select from Strategic Driver Table--}}
     <div class="form-group">
-        {!! Form::label('strategic_driver_id', 'Strategic Driver:') !!}
-        {!! Form::select('strategic_driver_id', array(''=>'options'), null, ['class'=>'form-control']) !!}
+        {!! Form::label('driver_id', 'Strategic Driver:') !!}
+        {!! Form::select('driver_id', ['' => 'Choose a Strategic Driver'] + $drivers, null, ['class'=>'form-control']) !!}
     </div>
 
     {{--Department ID Field - can select from department_id table--}}
     <div class="form-group">
         {!! Form::label('department_id', 'Business Department:') !!}
-        {!! Form::select('department_id', array(''=>'options'), null, ['class'=>'form-control']) !!}
+        {!! Form::select('department_id', ['' => 'Choose a Department'] + $departments, null, ['class'=>'form-control']) !!}
     </div>
 
     {{--Submit button--}}

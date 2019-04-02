@@ -15,7 +15,7 @@ class Project extends Model
         'ROI',
         'spend',
         'due_date',
-        'strategic_driver_id',
+        'driver_id',
         'department_id',
         'RAG_id',
         'status_id',
@@ -29,5 +29,15 @@ class Project extends Model
     public function user(){
 
         return $this->belongsTo('App\User');
+    }
+
+    public function department(){
+
+        return $this->belongsTo('App\Department');
+    }
+
+    public function driver(){
+
+        return $this->belongsTo('App\Driver');
     }
 }

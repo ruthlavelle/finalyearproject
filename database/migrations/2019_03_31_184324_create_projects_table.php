@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->float('ROI', 10, 2)->unsigned();
             $table->float('spend', 10, 2)->unsigned();
             $table->date('due_date')->index();
-            $table->integer('strategic_driver_id')->index();
+            $table->integer('driver_id')->index();
             $table->integer('department_id')->index();
             $table->integer('RAG_id')->index();
             $table->integer('status_id')->index();

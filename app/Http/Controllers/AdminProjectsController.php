@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\Driver;
 use App\Http\Requests\CreateProjectRequest;
 use App\Project;
 use Illuminate\Http\Request;
@@ -30,14 +32,14 @@ class AdminProjectsController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $departments = Department::lists('name', 'id')->all();
+        $drivers = Driver::lists('name', 'id')->all();
+
+        return view('admin.projects.create', compact('departments','drivers'));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(CreateProjectRequest $request)
     {
