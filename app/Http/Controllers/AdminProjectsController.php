@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Driver;
 use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\EditProjectRequest;
 use App\Project;
+use App\RAG;
+use App\Status;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminProjectsController extends Controller
 {
@@ -45,6 +49,8 @@ class AdminProjectsController extends Controller
     {
         $input = $request->all();
 
+        Session::flash('project_created', 'New Project Created');
+
         $user = Auth::user();
 
         $user->projects()->create($input);
@@ -71,7 +77,17 @@ class AdminProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        $drivers = Driver::lists('name', 'id')->all();
+
+        $rags = RAG::lists('name', 'id')->all();
+
+        $statuses = Status::lists('name', 'id')->all();
+
+        $departments = Department::lists('name', 'id')->all();
+
+        return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags', 'statuses'));
     }
 
     /**
@@ -83,7 +99,13 @@ class AdminProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        Session::flash('project_updated', 'Project has been updated');
+
+        Auth::user()->projects()->whereId($id)->first()->update($input);
+
+        return redirect('/admin/projects');
     }
 
     /**
@@ -94,6 +116,10 @@ class AdminProjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Project::findOrFail($id)->delete();
+
+        Session::flash('project_deleted', 'Project Deleted');
+
+        return redirect('/admin/projects');
     }
 }

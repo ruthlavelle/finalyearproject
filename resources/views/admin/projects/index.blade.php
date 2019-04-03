@@ -3,6 +3,24 @@
 
 @section('content')
 
+    @if(Session::has('project_updated'))
+
+        <b><p class="bg-success" align="center">{{session('project_updated')}}</p></b>
+
+    @endif
+
+    @if(Session::has('project_created'))
+
+        <b><p class="bg-success" align="center">{{session('project_created')}}</p></b>
+
+    @endif
+
+    @if(Session::has('project_deleted'))
+
+        <b><p class="bg-danger" align="center">{{session('project_deleted')}}</p></b>
+
+    @endif
+
     <h1>Projects</h1>
 
     <table>
@@ -15,6 +33,8 @@
                 <th scope="col">Strategic Driver</th>
                 <th scope="col">Business Department</th>
                 <th scope="col">Created By</th>
+                <th scope="col">Actions</th>
+
             </tr>
             </thead>
 
@@ -32,10 +52,10 @@
                         <td>{{$project->department ? $project->department->name : "Department not assigned"}}</td>
                         <td>{{$project->user->name}}</td>
 
-                        {{--}}<td><a href="{{route('admin.users.edit', $project->id)}}" class="btn btn-success">Update Project</a></td>
-                        <td> {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectController@destroy', $user->id ]]) !!}
-                            {!! Form::submit('Delete Project', ['class'=>'btn btn-danger']) !!}
-                            {!! Form::close() !!} </td> --}}
+                        <td><a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-success col-sm-12">Update</a>
+                        {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectsController@destroy', $project->id ]]) !!}
+                            {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
+                            {!! Form::close() !!} </td>
                     </tr>
                 @endforeach
             @endif

@@ -47,4 +47,9 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $e);
     }
+
+    public function renderForConsole($output, Exception $e)
+    {
+        throw $e;
+    }
 }

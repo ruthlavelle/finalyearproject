@@ -40,4 +40,12 @@ class Project extends Model
 
         return $this->belongsTo('App\Driver');
     }
+
+    public function RAG(){
+        return $this->belongsTo('App\RAG');
+    }
+
+    public function Status(){
+        return $this->belongsTo('App\Status');
+    }
 }

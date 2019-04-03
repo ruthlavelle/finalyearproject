@@ -26,12 +26,13 @@ class CreateProjectsTable extends Migration
             $table->integer('RAG_id')->index();
             $table->integer('status_id')->index();
             $table->integer('PM_id')->index();
-            $table->integer('user_id')->index();
+            $table->integer('user_id')->index()->nullable()->unsigned();
             $table->integer('IT_team_id')->index();
             $table->integer('priority_id')->index();
             $table->date('closure_date')->index();
 
             $table->timestamps();
+
         });
     }
 
