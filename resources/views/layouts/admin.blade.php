@@ -120,14 +120,14 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Categories<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Departments<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/categories">All Categories</a>
+                                <a href="{{route('admin.departments.index')}}">All Departments</a>
                             </li>
 
                             <li>
-                                <a href="/categories/create">Create Category</a>
+                                <a href="{{route('admin.departments.create')}}">Create Department</a>
                             </li>
 
                         </ul>
@@ -136,14 +136,29 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Strategic Drivers<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/media">All Media</a>
+                                <a href="{{route('admin.drivers.index')}}">All Strategic Drivers</a>
                             </li>
 
                             <li>
-                                <a href="">Upload Media</a>
+                                <a href="{{route('admin.drivers.create')}}">Create a Strategic Driver</a>
+                            </li>
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>RAG Statuses<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('admin.rags.index')}}">All RAG Statuses</a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('admin.rags.create')}}">Create a RAG Status</a>
                             </li>
 
                         </ul>

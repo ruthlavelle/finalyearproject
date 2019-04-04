@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Driver;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,7 +16,9 @@ class AdminDriversController extends Controller
      */
     public function index()
     {
-        //
+        $drivers = Driver::all();
+
+        return view('admin.drivers.index', compact('drivers'));
     }
 
     /**
@@ -36,7 +39,9 @@ class AdminDriversController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Driver::create($request->all());
+
+        return redirect('/admin/drivers');
     }
 
     /**

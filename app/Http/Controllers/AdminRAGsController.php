@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RAG;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,7 +16,9 @@ class AdminRAGsController extends Controller
      */
     public function index()
     {
-        //
+        $rags = RAG::all();
+
+        return view('admin.rags.index', compact('rags'));
     }
 
     /**
@@ -25,7 +28,7 @@ class AdminRAGsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +39,9 @@ class AdminRAGsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        RAG::create($request->all());
+
+        return redirect('/admin/rags');
     }
 
     /**

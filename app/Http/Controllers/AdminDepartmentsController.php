@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\Http\Requests\StoreDepartmentRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,7 +18,9 @@ class AdminDepartmentsController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Department::all();
+
+        return view('admin.departments.index', compact('departments'));
     }
 
     /**
@@ -25,7 +30,9 @@ class AdminDepartmentsController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::latest()->get();
+        dd($users);
+        //return view('admin.departments.index', compact('users'));
     }
 
     /**
@@ -34,9 +41,11 @@ class AdminDepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        //
+        Department::create($request->all());
+
+        return redirect('admin.departments.index');
     }
 
     /**
