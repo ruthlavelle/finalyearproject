@@ -33,6 +33,8 @@ Route::group(['middleware'=>'admin'], function (){
     Route::resource('admin/departments', 'AdminDepartmentsController');
     Route::resource('admin/drivers', 'AdminDriversController');
     Route::resource('admin/rags', 'AdminRAGsController');
+    Route::resource('admin/comments', 'ProjectCommentsController');
+    Route::resource('admin/comment/replies', 'ProjectRepliesController');
 
 });
 
