@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <h1>Departments</h1>
-
-    <div class="col-sm-6">
+    <h2 align="center">Departments</h2>
+    <br>
 
         {!! Form::open(['method'=>'POST', 'action'=>'AdminDepartmentsController@store']) !!}
 
@@ -15,9 +14,10 @@
         </div>
 
        <div class="form-group">
-            {!! Form::label('user_id', 'Department Manager:') !!}
-            {!! Form::select('user_id', ['' => 'Choose Department Manager'] + $users, null, ['class'=>'form-control']) !!}
-        </div>
+           {!! Form::label('user_id', 'Department Manager:') !!}
+           {!! Form::select('user_id', ['' => 'Choose Department Manager'] + $users, null, ['class'=>'form-control']) !!}
+
+       </div>
 
         <div class="form-group">
             {!! Form::submit('Create Business Department', ['class'=>'btn-btn-primary']) !!}
@@ -25,12 +25,11 @@
 
         {!! Form::close() !!}
 
-
-    </div>
-
-    <div class="col-sm-6">
+    <br>
 
         <table class="table table-hover">
+
+            @if ($departments)
 
             <thead>
             <tr>
@@ -42,8 +41,6 @@
 
             <tbody>
 
-            @if ($departments)
-
                 @foreach($departments as $department)
 
                     <tr>
@@ -51,18 +48,20 @@
                         <td>{{$department->name}}</td>
                         <td>{{$department->user ? $department->user->name: "No Manager Assigned"}}</td>
 
-                        {{--}}<td><a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-success col-sm-12">Update</a>
-                                {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectsController@destroy', $project->id ]]) !!}
+                        <td><a href="{{route('admin.departments.edit', $department->id)}}" class="btn btn-success col-sm-12">Update</a>
+                                {!! Form::open(['method'=>'DELETE', 'action' => ['AdminDepartmentsController@destroy', $department->id ]]) !!}
                                 {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
-                                {!! Form::close() !!} </td>--}}
+                                {!! Form::close() !!} </td>
                     </tr>
                 @endforeach
-            @endif
+
             </tbody>
         </table>
 
+        @endif
 
-    </div>
+
+    {{--</div>--}}
 
 
 @stop

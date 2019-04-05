@@ -11,8 +11,6 @@ class AdminRAGsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,21 +19,9 @@ class AdminRAGsController extends Controller
         return view('admin.rags.index', compact('rags'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -63,7 +49,9 @@ class AdminRAGsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rag = RAG::findOrFail($id);
+
+        return view('admin.rags.edit', compact('rag'));
     }
 
     /**
@@ -75,7 +63,13 @@ class AdminRAGsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rag = RAG::findOrFail($id);
+
+        $input = $request->all();
+
+        $rag->update($input);
+
+        return redirect('/admin/rags');
     }
 
     /**
@@ -86,6 +80,8 @@ class AdminRAGsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        RAG::findOrFail($id)->delete();
+
+        return redirect('/admin/rags');
     }
 }

@@ -2,13 +2,11 @@
 
 @section('content')
 
-    <h1>RAG Statuses</h1>
-
-    <div class="col-sm-6">
+    <h1 align="center">RAG Statuses</h1>
+    <br>
 
         {!! Form::open(['method'=>'POST', 'action'=>'AdminRAGsController@store']) !!}
 
-        {{--Name field which is displayed empty--}}
         <div class="form-group">
             {!! Form::label('name', 'RAG Name:') !!}
             {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -20,9 +18,7 @@
 
         {!! Form::close() !!}
 
-    </div>
-
-    <div class="col-sm-6">
+    <br><br>
 
         <table class="table table-hover">
 
@@ -42,20 +38,15 @@
                     <tr>
                         <td>{{$rag->id}}</td>
                         <td>{{$rag->name}}</td>
-                        {{--}}<td><a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-success col-sm-12">Update</a>
-                                {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectsController@destroy', $project->id ]]) !!}
+                        <td><a href="{{route('admin.rags.edit', $rag->id)}}" class="btn btn-success col-sm-12">Edit</a>
+                                {!! Form::open(['method'=>'DELETE', 'action' => ['AdminRAGsController@destroy', $rag->id ]]) !!}
                                 {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
-                                {!! Form::close() !!} </td>--}}
+                                {!! Form::close() !!} </td>
                     </tr>
                 @endforeach
             @endif
 
             </tbody>
         </table>
-
-
-
-    </div>
-
 
 @stop

@@ -88,20 +88,6 @@
                         <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.users.index')}}">All Users</a>
-                            </li>
-
-                            <li>
-                                <a href="{{route('admin.users.create')}}">Create User</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Projects<span class="fa arrow"></span></a>
@@ -119,51 +105,7 @@
                     </li>
 
 
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Departments<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.departments.index')}}">All Departments</a>
-                            </li>
 
-                            <li>
-                                <a href="{{route('admin.departments.create')}}">Create Department</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Strategic Drivers<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.drivers.index')}}">All Strategic Drivers</a>
-                            </li>
-
-                            <li>
-                                <a href="{{route('admin.drivers.create')}}">Create a Strategic Driver</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>RAG Statuses<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.rags.index')}}">All RAG Statuses</a>
-                            </li>
-
-                            <li>
-                                <a href="{{route('admin.rags.create')}}">Create a RAG Status</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
 
 
 
@@ -214,7 +156,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Admin Tasks<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">Second Level Item</a>
@@ -223,19 +165,42 @@
                                 <a href="#">Second Level Item</a>
                             </li>
                             <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
+                                <a href="#">Users <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="{{route('admin.users.index')}}">View All Users</a>
                                     </li>
                                     <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="{{route('admin.users.create')}}">Create A User</a>
+                                    </li>
+                                </ul>
+                                <a href="#">Departments <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#"><a href="{{route('admin.departments.index')}}">View All Departments</a></a>
                                     </li>
                                     <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="{{route('admin.departments.create')}}">Create New Department</a>
                                     </li>
+                                </ul>
+                                <a href="#">Strategic Drivers <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="#">Third Level Item</a>
+                                        <a href="{{route('admin.drivers.index')}}">All Strategic Drivers</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{route('admin.drivers.create')}}">Create a Strategic Driver</a>
+                                    </li>
+                                </ul>
+                                <a href="#">RAG Statuses <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{route('admin.rags.index')}}">All RAG Statuses</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{route('admin.rags.create')}}">Create a RAG Status</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-third-level -->
@@ -244,7 +209,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li class="active">
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Admin Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a class="active" href="blank.html">Blank Page</a>

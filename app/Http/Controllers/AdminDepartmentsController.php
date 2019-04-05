@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Department;
-use App\Http\Requests\StoreDepartmentRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -13,39 +12,24 @@ class AdminDepartmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $departments = Department::all();
 
-        return view('admin.departments.index', compact('departments'));
-    }
+        $users = User::lists('name', 'id')->all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $users = User::latest()->get();
-        dd($users);
-        //return view('admin.departments.index', compact('users'));
+        return view('admin.departments.index', compact('departments', 'users'));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(StoreDepartmentRequest $request)
+    public function store(Request $request)
     {
         Department::create($request->all());
 
-        return redirect('admin.departments.index');
+        return redirect('/admin/departments');
     }
 
     /**
@@ -67,7 +51,12 @@ class AdminDepartmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = Department::findOrFail($id);
+
+        $users = User::lists('name', 'id')->all();
+
+        return view('admin.departments.edit', compact('department', 'users'));
+
     }
 
     /**
@@ -79,7 +68,14 @@ class AdminDepartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $departments = Department::findOrFail($id);
+
+        $input = $request->all();
+
+        $departments->update($input);
+
+        return redirect('/admin/departments');
+
     }
 
     /**
@@ -90,6 +86,8 @@ class AdminDepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Department::findOrFail($id)->delete();
+
+        return redirect('/admin/departments');
     }
 }

@@ -63,7 +63,9 @@ class AdminDriversController extends Controller
      */
     public function edit($id)
     {
-        //
+        $driver = Driver::findOrFail($id);
+
+        return view('admin.drivers.edit', compact('driver'));
     }
 
     /**
@@ -75,7 +77,13 @@ class AdminDriversController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $driver = Driver::findOrFail($id);
+
+        $input = $request->all();
+
+        $driver->update($input);
+
+        return redirect('/admin/drivers');
     }
 
     /**
@@ -86,6 +94,8 @@ class AdminDriversController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Driver::findOrFail($id)->delete();
+
+        return redirect('/admin/drivers');
     }
 }
