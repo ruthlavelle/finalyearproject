@@ -92,13 +92,18 @@
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Projects<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.projects.index')}}">All Projects</a>
-                            </li>
 
                             <li>
                                 <a href="{{route('admin.projects.create')}}">Create a Project</a>
                             </li>
+                            <li>
+                                <a href="{{route('admin.projects.index')}}">All Projects</a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.comments.index')}}">Project Workspaces</a>
+                            </li>
+
+
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -174,6 +179,12 @@
                                         <a href="{{route('admin.users.create')}}">Create A User</a>
                                     </li>
                                 </ul>
+                                <a href="#">Roles <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{route('admin.roles.index')}}">View All Users</a>
+                                    </li>
+                                </ul>
                                 <a href="#">Departments <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
@@ -188,10 +199,6 @@
                                     <li>
                                         <a href="{{route('admin.drivers.index')}}">All Strategic Drivers</a>
                                     </li>
-
-                                    <li>
-                                        <a href="{{route('admin.drivers.create')}}">Create a Strategic Driver</a>
-                                    </li>
                                 </ul>
                                 <a href="#">RAG Statuses <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -199,9 +206,14 @@
                                         <a href="{{route('admin.rags.index')}}">All RAG Statuses</a>
                                     </li>
 
+                                </ul>
+
+                                <a href="#">Project Managers <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="{{route('admin.rags.create')}}">Create a RAG Status</a>
+                                        <a href="{{route('admin.projectmanager.index')}}">Create / View Project Managers</a>
                                     </li>
+
                                 </ul>
                                 <!-- /.nav-third-level -->
                             </li>

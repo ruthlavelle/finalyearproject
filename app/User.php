@@ -25,6 +25,15 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    public function project(){
+       return $this->hasMany('App\Project');
+    }
+
+    public function project_manager(){
+        return $this->belongsTo('App\ProjectManager');
+    }
+
+
     /**
      * Function to detect if user is an admin
      */
@@ -39,8 +48,4 @@ class User extends Authenticatable
 
     }
 
-    public function projects(){
-
-        return $this->hasMany('App\Project');
-    }
 }

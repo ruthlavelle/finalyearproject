@@ -69,6 +69,11 @@
             {!! Form::select('status_id', ['' => 'Status'] + $statuses, null, ['class'=>'form-control']) !!}
         </div>
 
+            <div class="form-group">
+                {!! Form::label('PM_id', 'Project Manager:') !!}
+                {!! Form::select('PM_id', ['' => 'Choose a PM'] + $pms, null, ['class'=>'form-control']) !!}
+            </div>
+
         </div>
 
     </div>

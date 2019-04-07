@@ -112,4 +112,8 @@ class AdminUsersController extends Controller
 
         return redirect('/admin/users');
     }
+
+    public function scopeProjectmanager($query){
+        return $query->where('role_id', '=', '2');
+    }
 }

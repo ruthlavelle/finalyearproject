@@ -48,4 +48,13 @@ class Project extends Model
     public function Status(){
         return $this->belongsTo('App\Status');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
+    public function project_manager(){
+        return $this->belongsTo('App\ProjectManager', 'PM_id');
+    }
+
 }

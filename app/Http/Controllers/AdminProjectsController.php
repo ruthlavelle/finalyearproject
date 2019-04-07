@@ -7,13 +7,16 @@ use App\Driver;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\EditProjectRequest;
 use App\Project;
+use App\ProjectManager;
 use App\RAG;
 use App\Status;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class AdminProjectsController extends Controller
 {
@@ -26,7 +29,15 @@ class AdminProjectsController extends Controller
     {
         $projects = Project::all();
 
-        return view('admin.projects.index', compact('projects'));
+        $project_managers = ProjectManager::with('user')->get();
+
+        $pms = [];
+
+        foreach($project_managers as $pm){
+            $pms[$pm->id] = $pm->user->name;
+        }
+
+        return view('admin.projects.index', compact('projects', 'pms', 'project_managers'));
     }
 
     /**
@@ -53,7 +64,7 @@ class AdminProjectsController extends Controller
 
         $user = Auth::user();
 
-        $user->projects()->create($input);
+        $user->project()->create($input);
 
         return redirect('/admin/projects');
     }
@@ -87,7 +98,21 @@ class AdminProjectsController extends Controller
 
         $departments = Department::lists('name', 'id')->all();
 
-        return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags', 'statuses'));
+        $project_managers = ProjectManager::with('user')->get();
+
+        $pms = [];
+
+        foreach($project_managers as $pm){
+            $pms[$pm->id] = $pm->user->name;
+        }
+
+            //DB::table('project_managers')
+            //->join('users', 'users.id', '=', 'project_managers.user_id')
+            //->select('users.name', 'project_managers.id')
+            //->lists('users.name', 'project.managers.id')
+            //->get();
+
+        return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags', 'pms', 'statuses' ));
     }
 
     /**
@@ -103,7 +128,7 @@ class AdminProjectsController extends Controller
 
         Session::flash('project_updated', 'Project has been updated');
 
-        Auth::user()->projects()->whereId($id)->first()->update($input);
+        Auth::user()->project()->whereId($id)->first()->update($input);
 
         return redirect('/admin/projects');
     }
@@ -121,5 +146,14 @@ class AdminProjectsController extends Controller
         Session::flash('project_deleted', 'Project Deleted');
 
         return redirect('/admin/projects');
+    }
+
+    public function project($id){
+
+        $project = Project::findOrFail($id);
+
+        $users = User::lists('name', 'id')->all();
+
+        return view('project', compact('project', 'users'));
     }
 }
