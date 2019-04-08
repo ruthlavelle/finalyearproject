@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectCommentsController extends Controller
 {
@@ -36,7 +38,19 @@ class ProjectCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $data = [
+
+            'project_id' => $request->project_id,
+            'author' => $user->name,
+            'email' => $user->email,
+            'body' => $request->body
+        ];
+
+        Comment::create($data);
+
+        return redirect()->back();
     }
 
     /**
@@ -63,24 +77,22 @@ class ProjectCommentsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        Comment::findOrFail($id)->update($request->all());
+
+        return redirect()->back();
+
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        Comment::findOrFail($id)->delete();
+
+        return redirect()->back();
     }
 }

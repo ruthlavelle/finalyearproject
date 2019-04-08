@@ -23,7 +23,8 @@ class Project extends Model
         'user_id',
         'IT_team_id',
         'priority_id',
-        'closure_date'
+        'closure_date',
+        'approval_status'
     ];
 
     public function user(){

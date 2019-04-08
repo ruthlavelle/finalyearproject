@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index');
 });
 
 Route::auth();
@@ -21,15 +20,12 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/project/{id}', ['as'=>'home.project', 'uses'=>'AdminProjectsController@project']);
 
-
 /*
 * Route with middleware to allow only admins to see admin/users page
 */
 Route::group(['middleware'=>'admin'], function (){
 
-    Route::get('/admin', function (){
-        return view('admin.index');
-    });
+    Route::get('/admin', 'AdminController@index');
     Route::resource('admin/users', 'AdminUsersController');
     Route::resource('admin/projects', 'AdminProjectsController');
     Route::resource('admin/departments', 'AdminDepartmentsController');
@@ -39,6 +35,13 @@ Route::group(['middleware'=>'admin'], function (){
     Route::resource('admin/comment/replies', 'ProjectRepliesController');
     Route::resource('admin/roles', 'AdminRoleController');
     Route::resource('admin/projectmanager', 'AdminProjectManagerController');
+
+});
+
+Route::group(['middleware'=>'auth'], function (){
+
+    Route::post('comment/reply', 'CommentRepliesController@createReply');
+
 
 });
 

@@ -51,11 +51,37 @@
                         <td>{{$project->driver ? $project->driver->name: "Strategic Driver not assigned"}}</td>
                         <td>{{$project->department ? $project->department->name : "Department not assigned"}}</td>
                         <td>{{$project->user->name}}</td>
-
-                        <td><a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-success col-sm-12">Update</a>
+                        <td><a href ="{{route('home.project', $project->id)}}" class="btn btn-default col-sm-8">Visit Workspace</a>
+                            <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-info col-sm-8">Update</a>
                         {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectsController@destroy', $project->id ]]) !!}
-                            {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
+                        {!! Form::submit('Delete', ['class'=>'btn btn-warning col-sm-8']) !!}
+
+
+                        @if($project->approval_status == 0)
+
+                            {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
+
+                            <input type="hidden" name="approval_status" value="1">
+
+                            <div class="form-group">
+                                {!! Form::submit('Approve', ['class'=>'btn btn-success col-sm-8']) !!}
+                            </div>
+
                             {!! Form::close() !!} </td>
+
+                        @elseif ($project->approval_status == 1)
+
+                            {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
+
+                            <input type="hidden" name="approval_status" value="0">
+
+                            {!! Form::submit('Reject', ['class'=>'btn btn-danger col-sm-8']) !!}
+
+                            {!! Form::close() !!} </td>
+
+
+                        @endif
+
                     </tr>
                 @endforeach
             @endif

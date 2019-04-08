@@ -29,9 +29,7 @@ class CreateProjectRequest extends Request
             'description' => 'required',
             'benefits' => 'required',
             'cost' => 'required',
-            'ROI' => 'required',
-            'driver_id' => 'required',
-            'department_id' => 'required'
+            'ROI' => 'required'
         ];
     }
 }

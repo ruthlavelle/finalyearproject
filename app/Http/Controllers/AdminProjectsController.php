@@ -37,7 +37,7 @@ class AdminProjectsController extends Controller
             $pms[$pm->id] = $pm->user->name;
         }
 
-        return view('admin.projects.index', compact('projects', 'pms', 'project_managers'));
+        return view('admin.projects.index', compact('projects', 'pms'));
     }
 
     /**
@@ -106,12 +106,6 @@ class AdminProjectsController extends Controller
             $pms[$pm->id] = $pm->user->name;
         }
 
-            //DB::table('project_managers')
-            //->join('users', 'users.id', '=', 'project_managers.user_id')
-            //->select('users.name', 'project_managers.id')
-            //->lists('users.name', 'project.managers.id')
-            //->get();
-
         return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags', 'pms', 'statuses' ));
     }
 
@@ -154,6 +148,10 @@ class AdminProjectsController extends Controller
 
         $users = User::lists('name', 'id')->all();
 
-        return view('project', compact('project', 'users'));
+        $comments = $project->comments()->get();
+
+        return view('project', compact('project', 'users', 'comments'));
     }
+
+
 }

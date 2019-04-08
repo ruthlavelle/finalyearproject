@@ -30,6 +30,7 @@ class CreateProjectsTable extends Migration
             $table->integer('IT_team_id')->index();
             $table->integer('priority_id')->index();
             $table->date('closure_date')->index();
+            $table->integer('approval_status')->default(0);
 
             $table->timestamps();
 

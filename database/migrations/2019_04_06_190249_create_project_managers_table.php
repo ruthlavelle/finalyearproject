@@ -15,7 +15,6 @@ class CreateProjectManagersTable extends Migration
         Schema::create('project_managers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->('user_name');
             $table->timestamps();
         });
     }
