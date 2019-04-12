@@ -74,6 +74,18 @@
                 {!! Form::select('PM_id', ['' => 'Choose a PM'] + $pms, null, ['class'=>'form-control']) !!}
             </div>
 
+            <div class="form-group">
+                {!! Form::label('spend', 'Spend to Date:') !!}
+                {!! Form::text('spend',null, ['class'=>'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('due_date', 'Current Delivery Date:') !!}
+                {!! Form::date('due_date', null, ['class'=>'form-control']) !!}
+            </div>
+
+
+
         </div>
 
     </div>

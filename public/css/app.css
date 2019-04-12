@@ -10,4 +10,34 @@
 .form-opening {
   margin-top: 20px; }
 
+body {
+  background: url("../images/DAP.PNG") no-repeat repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  margin: 0px
+}
+
+nav  {
+  position: fixed !important;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+
+}
+
+/* Headings on home page */
+h1.font-weight-light {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Paragraphs on home page */
+p.lead {
+  font-size: 15px;
+}
+
 /*# sourceMappingURL=app.css.map */

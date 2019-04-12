@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index');
-});
 
 Route::auth();
 
@@ -23,6 +22,8 @@ Route::get('/project/{id}', ['as'=>'home.project', 'uses'=>'AdminProjectsControl
 /*
 * Route with middleware to allow only admins to see admin/users page
 */
+
+
 Route::group(['middleware'=>'admin'], function (){
 
     Route::get('/admin', 'AdminController@index');
@@ -35,12 +36,16 @@ Route::group(['middleware'=>'admin'], function (){
     Route::resource('admin/comment/replies', 'ProjectRepliesController');
     Route::resource('admin/roles', 'AdminRoleController');
     Route::resource('admin/projectmanager', 'AdminProjectManagerController');
-
+    Route::resource('admin/status', 'AdminStatusController');
 });
+
+Route::resource('/home', 'HomeController');
 
 Route::group(['middleware'=>'auth'], function (){
 
     Route::post('comment/reply', 'CommentRepliesController@createReply');
+    Route::resource('admin/projects', 'AdminProjectsController');
+    Route::resource('users/projects', 'UserProjectsController');
 
 
 });

@@ -16,7 +16,6 @@
                 <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
 
-
             <li>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Projects<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -53,6 +52,9 @@
                     </li>
                     <li>
                         <a href="{{route('admin.projectmanager.index')}}">Project Managers</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.status.index')}}">Project Statuses</a>
                     </li>
                     <li>
                         <a href="#">Users <span class="fa arrow"></span></a>

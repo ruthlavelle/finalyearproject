@@ -29,6 +29,9 @@ class AdminProjectsController extends Controller
     {
         $projects = Project::all();
 
+        $departments = Department::lists('name', 'id')->all();
+        $drivers = Driver::lists('name', 'id')->all();
+
         $project_managers = ProjectManager::with('user')->get();
 
         $pms = [];
@@ -37,7 +40,7 @@ class AdminProjectsController extends Controller
             $pms[$pm->id] = $pm->user->name;
         }
 
-        return view('admin.projects.index', compact('projects', 'pms'));
+        return view('admin.projects.index', compact('projects', 'pms', 'departments', 'drivers'));
     }
 
     /**

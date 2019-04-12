@@ -41,11 +41,16 @@ class User extends Authenticatable
 
        if($this->role->name == "Administrator" && $this->is_active == 1){
 
-          return true;
+         return true;
         }
 
         return false;
 
+    }
+
+    public function hasRole($role)
+    {
+        return $this->user->role_id == $role;
     }
 
 }
