@@ -17,25 +17,6 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-wrench fa-fw"></i> Projects<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-
-                    <li>
-                        <a href="{{route('admin.projects.create')}}">Create a Project</a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.projects.index')}}">All Projects</a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.comments.index')}}">Project Workspaces</a>
-                    </li>
-
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-
-
-            <li>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Admin Centre<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>

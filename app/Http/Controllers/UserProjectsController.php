@@ -22,7 +22,7 @@ class UserProjectsController extends Controller
 
         $departments = Department::lists('name', 'id')->all();
 
-        $RAG = RAG::lists('name', 'id');
+        $rags = RAG::lists('name', 'id')->all();
 
         $drivers = Driver::lists('name', 'id')->all();
 
@@ -34,7 +34,7 @@ class UserProjectsController extends Controller
             $pms[$pm->id] = $pm->user->name;
         }
 
-        return view('users.projects.index', compact('project', 'pms', 'departments', 'drivers', 'RAG'));
+        return view('users.projects.index', compact('project', 'pms', 'departments', 'drivers', 'rags'));
     }
 
     public function approvals()

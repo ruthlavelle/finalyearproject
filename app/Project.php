@@ -43,7 +43,7 @@ class Project extends Model
     }
 
     public function RAG(){
-        return $this->belongsTo('App\RAG');
+        return $this->belongsTo('App\RAG', 'RAG_id');
     }
 
     public function Status(){

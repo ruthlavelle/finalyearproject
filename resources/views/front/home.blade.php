@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="thumbnail" align="center">
-                            <a href="{{route('users.projects.index')}}">
+                            <a href="{{route('user.projects.index')}}">
                                 <img src="images/Active.jpg" alt="" style="width:20%">
                                 <div class="caption">
                                     <p>View My Active Projects</p>

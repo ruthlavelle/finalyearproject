@@ -44,10 +44,8 @@ Route::resource('/home', 'HomeController');
 Route::group(['middleware'=>'auth'], function (){
 
     Route::post('comment/reply', 'CommentRepliesController@createReply');
-    Route::resource('users/projects', 'UserProjectsController');
+    Route::get('users/projects', ['as'=>'user.projects.index', 'uses'=>'UserProjectsController@index']);
     Route::get('users/projects/approvals', ['as'=>'user.project.approvals', 'uses'=>'UserProjectsController@approvals']);
-
-
 
 });
 

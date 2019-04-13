@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">My Active</h1>
+                <h1 class="font-weight-light">My Active Projects</h1>
 
                 <p class="lead" align="justify" >
 
@@ -14,8 +14,11 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Project Name</th>
+                            <th scope="col">Name</th>
                             <th scope="col">RAG Status</th>
+                            <th scope="col">Spend to Date</th>
+                            <th scope="col">Stage</th>
+                            <th scope="col">Expected Completion Date</th>
                             <th scope="col">Options</th>
 
                         </tr>
@@ -31,8 +34,11 @@
 
                                     <tr>
                                         <td>{{$project->name}}</td>
-                                        <td>{{$project->RAG_id->name}}</td>
-                                        <td><a href ="{{route('home.project', $project->id)}}" class="btn btn-default col-sm-8">Visit Workspace</a>
+                                        <td>{{$project->rag->name}}</td>
+                                        <td>{{$project->spend}}</td>
+                                        <td>{{$project->stage_id}}</td>
+                                        <td>{{$project->due_date}}</td>
+                                        <td><a href ="{{route('home.project', $project->id)}}" class="btn btn-default col-sm-10">Visit Workspace</a>
                                         @endif
                                     </tr>
                                     @endforeach

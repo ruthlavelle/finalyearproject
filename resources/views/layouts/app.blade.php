@@ -30,11 +30,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{--}}{{route('users.projects.index')}}--}}">My Requests</a>
+                        <a class="nav-link" href="{{route('user.project.approvals')}}">Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">My Active Projects</a>
+                        <a class="nav-link" href="{{route('user.projects.index')}}">Active Projects</a>
                     </li>
+                    @if(Auth::user()->checkAdmin())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Portfolio Management
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('admin.projects.index')}}">All Projects</a>
+                                <a class="dropdown-item" href="{{route('admin.projects.create')}}">Create Project</a>
+                            </div>
+                        </li>
+                    @endif
 
                 </ul>
             </div>
@@ -51,6 +62,12 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    @if(Auth::user()->checkAdmin())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.projects.index')}}">Admin</a>
+                        </li>
+                    @endif
+
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
