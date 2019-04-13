@@ -33,7 +33,7 @@ Route::group(['middleware'=>'admin'], function (){
     Route::resource('admin/drivers', 'AdminDriversController');
     Route::resource('admin/rags', 'AdminRAGsController');
     Route::resource('admin/comments', 'ProjectCommentsController');
-    Route::resource('admin/comment/replies', 'ProjectRepliesController');
+    Route::resource('admin/comment/replies', 'CommentRepliesController');
     Route::resource('admin/roles', 'AdminRoleController');
     Route::resource('admin/projectmanager', 'AdminProjectManagerController');
     Route::resource('admin/status', 'AdminStatusController');
@@ -44,11 +44,13 @@ Route::resource('/home', 'HomeController');
 Route::group(['middleware'=>'auth'], function (){
 
     Route::post('comment/reply', 'CommentRepliesController@createReply');
-    Route::resource('admin/projects', 'AdminProjectsController');
     Route::resource('users/projects', 'UserProjectsController');
+    Route::get('users/projects/approvals', ['as'=>'user.project.approvals', 'uses'=>'UserProjectsController@approvals']);
+
 
 
 });
+
 
 
 

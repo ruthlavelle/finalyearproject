@@ -12,8 +12,7 @@
 
                     <br>
                     The IT BRM is responsible for coordinating and prioritising the demand from Dublin Airport into IT and ensuring maximum business value from IT investments.
-                    We work with business teams to identify areas where IT can transform processes and add value. We also work with IT to find the most cost-effective solutions to business problems, and to ensure the underlying
-                    infrastructure allows our business teams to be efficient, agile and effective.
+                    We work with business teams to identify areas where IT can transform processes and add value.
                     <br><br>
                     The Dublin Airport IT BRM team has responsibility for IT projects and requests across the entire DAP business.
                     This includes Airport Operations, Asset Care, Commercial, DAP Finance, DAP HR,
@@ -36,8 +35,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="thumbnail">
-                            <a href="{{route('users.projects.index')}}">
-                                <img src="images/Status.jpg" alt="Nature" style="width:18%">
+                            <a href="{{route('user.project.approvals')}}">
+                                <img src="images/Status.jpg" alt="" style="width:18%">
                                 <div class="caption" align="center">
                                     <p>View My Outstanding Requests</p>
                                 </div>
@@ -46,8 +45,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="thumbnail" align="center">
-                            <a href="/w3images/fjords.jpg">
-                                <img src="images/Active.jpg" alt="Fjords" style="width:20%">
+                            <a href="{{route('users.projects.index')}}">
+                                <img src="images/Active.jpg" alt="" style="width:20%">
                                 <div class="caption">
                                     <p>View My Active Projects</p>
                                 </div>

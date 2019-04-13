@@ -14,9 +14,11 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th scope="col">Project ID</th>
                             <th scope="col">Project Name</th>
-                            <th scope="col">RAG Status</th>
-                            <th scope="col">Options</th>
+                            <th scope="col">Requested By</th>
+                            <th scope="col">Days Since Creation</th>
+                            <th scope="col">Approval Status</th>
 
                         </tr>
                         </thead>
@@ -27,12 +29,15 @@
 
                             @foreach($project as $project)
 
-                                @if ($project->approval_status == 1)
+                                @if ($project->approval_status == 0)
 
                                     <tr>
+                                        <td>{{$project->id}}</td>
                                         <td>{{$project->name}}</td>
-                                        <td>{{$project->RAG_id->name}}</td>
-                                        <td><a href ="{{route('home.project', $project->id)}}" class="btn btn-default col-sm-8">Visit Workspace</a>
+                                        <td>{{$project->user->name}}</td>
+                                        <td>{{$project->created_at->diffForHumans()}}
+                                        <td>Awaiting Approval</td>
+
                                         @endif
                                     </tr>
                                     @endforeach

@@ -37,7 +37,16 @@ h1.font-weight-light {
 
 /* Paragraphs on home page */
 p.lead {
-  font-size: 15px;
+  font-size: 14px;
 }
 
+#login {
+  position: relative;
+  top: 100%;
+
+}
+
+.panel-default {
+  margin-top: 120px;
+}
 /*# sourceMappingURL=app.css.map */

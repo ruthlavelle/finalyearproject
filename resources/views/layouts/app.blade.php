@@ -21,6 +21,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            @if (Auth::check())
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
@@ -29,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('users.projects.index')}}">My Requests</a>
+                        <a class="nav-link" href="{{--}}{{route('users.projects.index')}}--}}">My Requests</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">My Active Projects</a>
@@ -37,7 +38,38 @@
 
                 </ul>
             </div>
-        </div>
+
+            @else
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                        </li>
+                    </ul>
+                </div>
+                @endif
+
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" href="#">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                </ul>
+                    @endif
+
+
+            </div>
     </nav>
 
 </head>
