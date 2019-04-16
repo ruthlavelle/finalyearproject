@@ -1,14 +1,27 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('content')
 
-    <div class="panel panel-default" >
-            <canvas id="myRAGChart"></canvas>
-    </div>
-    <div class="panel panel-default" >
-        <canvas id="myStatusChart"></canvas>
-    </div>
-    <div class="panel panel-default" >
-        <canvas id="myDeptChart"></canvas>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                <h1 class="font-weight-light">Portfolio Dashboard</h1>
+
+                <div class="panel panel-default" >
+                    <canvas id="RAGChart" width="100" height="200"></canvas>
+                </div>
+
+                <div class="panel panel-default" >
+                    <canvas id="myStatusChart" width="100" height="200"></canvas>
+                </div>
+
+                <div class="panel panel-default" >
+                    <canvas id="myDeptChart" width="100" height="200"></canvas>
+                </div>
+
+
+           </div>
+        </div>
     </div>
 @stop
 
@@ -18,7 +31,7 @@
 
    <script>
 
-       var ctx = document.getElementById('myRAGChart').getContext('2d');
+       var ctx = document.getElementById('RAGChart').getContext('2d');
        var myChart = new Chart(ctx, {
            type: 'pie',
            data: {

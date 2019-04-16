@@ -26,7 +26,7 @@ Route::get('/project/{id}', ['as'=>'home.project', 'uses'=>'AdminProjectsControl
 
 Route::group(['middleware'=>'admin'], function (){
 
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', ['as'=>'admin.index', 'uses'=>'AdminController@index']);
     Route::resource('admin/users', 'AdminUsersController');
     Route::resource('admin/projects', 'AdminProjectsController');
     Route::resource('admin/departments', 'AdminDepartmentsController');

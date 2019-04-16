@@ -1,96 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Project Workspace</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-
-    <link href="{{asset('css/libs.css')}}" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+@extends('layouts.app')
 
 <!-- Page Content -->
+@section('content')
+
 <div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
 
-    <div class="row">
+            <!-- Portfolio Item Heading -->
+            <h1 class="my-4">{{$project->name}}
+                <small></small>
+            </h1>
 
-        <!-- Blog Post Content Column -->
-        <div class="col-lg-8">
+            <!-- Portfolio Item Row -->
+            <div class="row">
+                <div class="col-md-2" align="center">
+                    <br>
+                    @if($project->RAG_id == 1)
+                        <img class="img-fluid" src="/images/RedLight.jpg" alt="">
+                    @elseif($project->RAG_id == 2)
+                        <img class="img-fluid" src="/images/AmberLight.jpg" alt="">
+                    @elseif($project->RAG_id == 3)
+                        <img class="img-fluid" src="/images/GreenLight.jpg" alt="">
+                    @else
+                        <img class="img-fluid" src="/images/BlankImage.jpg" alt="">
+                    @endif
+                </div>
 
-            @yield('content')
-
-        </div>
-
-
-    <hr>
-
-    <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
+                <div class="col-md-5">
+                    <h3 class="my-3">Project Description</h3>
+                    <p>{{$project->description}}</p>
+                    <h3 class="my-3">Current Staus Details</h3>
+                    <ul>
+                        <li><b>Current RAG Status: </b> {{$project->RAG->name}}</li>
+                        <li><b>Spend to date:</b> €{{$project->spend}}</li>
+                        <li><b>Current Stage:</b> {{$project->stage}}</li>
+                        <li>IT Team:</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!-- /.row -->
-    </footer>
 
+            <!-- comments section -->
+            <div class="col-md-12 col-md-offset-0 comments-section">
+
+                <!-- comment form -->
+                <h4>Post a comment:</h4>
+                {!!  Form::open(['method'=>'POST', 'action'=>'ProjectCommentsController@store']) !!}
+                <input type="hidden" name="project_id" value="{{$project->id}}">
+                {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                {!! Form::submit('Submit Comment', ['class'=>'btn btn-primary btn-sm pull-right'])  !!}
+                {!! Form::close()!!}
+
+            <!-- Display total number of comments on this post  -->
+                @if(count($comments) > 0)
+                    <h2><span id="comments_count">{{count($comments)}}</span> Comment(s)</h2>
+                    <hr>
+
+                    <!-- comments wrapper -->
+                    @foreach($comments as $comment)
+
+                        <div id="comments-wrapper">
+                            <div class="comment clearfix">
+                                <div class="comment-details">
+                                    <span class="comment-name">{{$comment->author}}</span>
+                                    <span class="comment-date">{{$comment->created_at->diffForHumans()}}</span>
+                                    <p>{{$comment->body}}</p>
+
+                                    <a class="reply-btn" href="#" >reply</a>
+
+                                    <div class="comment-reply">
+                                    {!!  Form::open(['method'=>'POST', 'action'=>'CommentRepliesController@createReply']) !!}
+
+                                    <input type="hidden" name="comment_id" value="{{$comment->id}}">
+
+                                    {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>1]) !!}
+                                    {!! Form::submit('Submit', ['class'=>'btn btn-primary btn-sm pull-right'])  !!}
+
+                                    {!! Form::close()!!}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                                @if(count($comment->replies) > 0)
+
+                                    @foreach($comment->replies as $reply)
+
+                                        <div>
+                                            <!-- reply -->
+                                            <div class="comment reply clearfix">
+                                                <div class="comment-details">
+
+                                                    <span class="comment-name">{{$reply->author}}</span>
+                                                    <span class="comment-date">{{$reply->created_at->diffForHumans()}}</span>
+                                                    <p>{{$reply->body}}</p>
+
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            @endif
+
+                                            @endforeach
+                                            @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+    </div>
 </div>
-<!-- /.container -->
+    </div>
 
-<script src="{{asset('js/libs.js')}}"></script>
 
-@yield('scripts')
+@stop
 
-</body>
+        @section('scripts')
 
-</html>
+
+
+
+        <script>$(".comment-details .reply-btn").click(function(){
+
+            $(this).next().slideToggle("slow");
+
+            });
+        </script>
+            @stop

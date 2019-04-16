@@ -151,9 +151,19 @@ class AdminProjectsController extends Controller
 
         $users = User::lists('name', 'id')->all();
 
+        $RAG = RAG::lists('name', 'id')->all();
+
         $comments = $project->comments()->get();
 
-        return view('project', compact('project', 'users', 'comments'));
+        $project_managers = ProjectManager::with('user')->get();
+
+        $pms = [];
+
+        foreach($project_managers as $pm){
+            $pms[$pm->id] = $pm->user->name;
+        }
+
+        return view('layouts.project-home', compact('project', 'users', 'RAG', 'comments', 'pms'));
     }
 
 
