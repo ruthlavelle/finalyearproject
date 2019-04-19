@@ -1,23 +1,31 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1 align="center">RAG Statuses</h1>
-    <br>
+    <!-- White Container in Page -->
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
 
-    {!! Form::model($rag, ['method'=>'PATCH', 'action'=>['AdminRAGsController@update', $rag->id]]) !!}
+                <h1 class="font-weight-light">Edit RAG Status: {{$rag->name}}</h1><br>
 
-    {{--Name field which is displayed empty--}}
-    <div class="form-group">
-        {!! Form::label('name', 'RAG Name:') !!}
-        {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                {{-- Form to update Department --}}
+                {!! Form::model($rag, ['method'=>'PATCH', 'action'=>['AdminRAGsController@update' , $rag->id]]) !!}
+
+                {{-- Name field --}}
+                <div class="form-group">
+                    {!! Form::label('name', 'Strategic Driver Name:') !!}
+                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                </div>
+
+
+                <div class="form-group" align="center">
+                    {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+                </div>
+
+                {!! Form::close() !!}
+
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        {!! Form::submit('Update', ['class'=>'btn-btn-primary']) !!}
-    </div>
-
-    {!! Form::close() !!}
-
-
 @stop

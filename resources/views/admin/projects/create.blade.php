@@ -43,13 +43,13 @@
                 {{--Strategic Driver Field - can select from Strategic Driver Table--}}
                 <div class="form-group">
                     {!! Form::label('driver_id', 'Strategic Driver:') !!}
-                    {!! Form::select('driver_id', ['' => ''] + $drivers, null, ['class'=>'form-control']) !!}
+                    {!! Form::select('driver_id', ['' => ''] + $drivers, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
                  </div>
 
                 {{--Department ID Field - can select from department_id table--}}
                 <div class="form-group">
                     {!! Form::label('department_id', 'Business Department:') !!}
-                    {!! Form::select('department_id', ['' => ''] + $departments, null, ['class'=>'form-control']) !!}
+                    {!! Form::select('department_id', ['' => ''] + $departments, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
                 </div>
 
                 <div class="form-group">

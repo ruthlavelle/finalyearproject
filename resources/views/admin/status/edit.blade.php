@@ -7,14 +7,14 @@
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
 
-                <h1 class="font-weight-light">Edit Driver: {{$driver->name}}</h1><br>
+                <h1 class="font-weight-light">Edit Status: {{$status->name}}</h1><br>
 
-                {{-- Form to update Department --}}
-                {!! Form::model($driver, ['method'=>'PATCH', 'action'=>['AdminDriversController@update' , $driver->id]]) !!}
+                {{-- Form to update Status --}}
+                {!! Form::model($status, ['method'=>'PATCH', 'action'=>['AdminStatusController@update' , $status->id]]) !!}
 
                 {{-- Name field --}}
                 <div class="form-group">
-                    {!! Form::label('name', 'Strategic Driver Name:') !!}
+                    {!! Form::label('name', 'Status Name:') !!}
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
 

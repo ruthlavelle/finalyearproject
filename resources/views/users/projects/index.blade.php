@@ -34,7 +34,7 @@
 
                                     <tr>
                                         <td>{{$project->name}}</td>
-                                        <td>{{$project->rag->name}}</td>
+                                        <td>{{$project->RAG_id}}</td>
                                         <td>{{$project->spend}}</td>
                                         <td>{{$project->stage_id}}</td>
                                         <td>{{$project->due_date}}</td>

@@ -27,6 +27,11 @@ class Project extends Model
         'approval_status'
     ];
 
+    protected $dates = [
+        'due_date',
+        'closure_date'
+    ];
+
     public function user(){
 
         return $this->belongsTo('App\User');

@@ -17,9 +17,27 @@ class AdminStatusController extends Controller
         return view('admin.status.index', compact('status'));
     }
 
+    public function edit($id)
+    {
+        $status = Status::findOrFail($id);
+
+        return view('admin.status.edit', compact('status'));
+    }
+
     public function store(Request $request)
     {
         Status::create($request->all());
+
+        return redirect('/admin/status');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $status = Status::findOrFail($id);
+
+        $input = $request->all();
+
+        $status->update($input);
 
         return redirect('/admin/status');
     }

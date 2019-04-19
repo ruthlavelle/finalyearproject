@@ -13,4 +13,7 @@ class RAG extends Model
         'name'
     ];
 
+    public function projects(){
+        return $this->hasMany('App\Project');
+    }
 }

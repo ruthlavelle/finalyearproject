@@ -1,27 +1,37 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-    <<h2 align="center">Departments</h2>
-    <br>
+    <!-- White Container in Page -->
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
 
-    {!! Form::model($department, ['method'=>'PATCH', 'action'=>['AdminDepartmentsController@update' , $department->id]]) !!}
+                <h1 class="font-weight-light">Edit Department: {{$department->name}}</h1><br>
 
-    {{--Name field which is displayed empty--}}
-    <div class="form-group">
-        {!! Form::label('name', 'Department Name:') !!}
-        {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                {{-- Form to update Department --}}
+                {!! Form::model($department, ['method'=>'PATCH', 'action'=>['AdminDepartmentsController@update' , $department->id]]) !!}
+
+                {{-- Name field --}}
+                <div class="form-group">
+                    {!! Form::label('name', 'Department Name:') !!}
+                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                </div>
+
+                {{-- Update Department Manager, displays current manager --}}
+                <div class="form-group">
+                    {!! Form::label('user_id', 'Department Manager:') !!}
+                    {!! Form::select('user_id', ['' => ''] + $users, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
+                </div>
+
+                <div class="form-group" align="center">
+                    {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+                </div>
+
+                {!! Form::close() !!}
+
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        {!! Form::label('user_id', 'Department Manager:') !!}
-        {!! Form::select('user_id', ['' => 'Choose Department Manager'] + $users, null, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::submit('Update', ['class'=>'btn-btn-primary']) !!}
-    </div>
-
-    {!! Form::close() !!}
 
 @stop

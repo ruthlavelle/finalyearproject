@@ -16,14 +16,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use DB;
 
 class AdminProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -31,6 +28,7 @@ class AdminProjectsController extends Controller
 
         $departments = Department::lists('name', 'id')->all();
         $drivers = Driver::lists('name', 'id')->all();
+        $RAG = RAG::lists('name', 'id')->all();
 
         $project_managers = ProjectManager::with('user')->get();
 
@@ -40,7 +38,7 @@ class AdminProjectsController extends Controller
             $pms[$pm->id] = $pm->user->name;
         }
 
-        return view('admin.projects.index', compact('projects', 'pms', 'departments', 'drivers'));
+        return view('admin.projects.index', compact('projects', 'departments', 'drivers', 'RAG', 'pms'));
     }
 
     /**
@@ -62,8 +60,6 @@ class AdminProjectsController extends Controller
     public function store(CreateProjectRequest $request)
     {
         $input = $request->all();
-
-        Session::flash('project_created', 'New Project Created');
 
         $user = Auth::user();
 
@@ -123,8 +119,6 @@ class AdminProjectsController extends Controller
     {
         $input = $request->all();
 
-        Session::flash('project_updated', 'Project has been updated');
-
         Auth::user()->project()->whereId($id)->first()->update($input);
 
         return redirect('/admin/projects');
@@ -139,8 +133,6 @@ class AdminProjectsController extends Controller
     public function destroy($id)
     {
         Project::findOrFail($id)->delete();
-
-        Session::flash('project_deleted', 'Project Deleted');
 
         return redirect('/admin/projects');
     }

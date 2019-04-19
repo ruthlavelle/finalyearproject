@@ -1,52 +1,57 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1 align="center">RAG Statuses</h1>
-    <br>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                <h1 class="font-weight-light">RAG Statuses</h1><br>
 
-        {!! Form::open(['method'=>'POST', 'action'=>'AdminRAGsController@store']) !!}
+                <div class="col-md-4">
 
-        <div class="form-group">
-            {!! Form::label('name', 'RAG Name:') !!}
-            {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    {{-- Form to create a new department in DB --}}
+                    {!! Form::open(['method'=>'POST', 'action'=>'AdminRAGsController@store']) !!}
+
+                    <div class="form-group">
+                        {!! Form::label('name', 'RAG Name:') !!}
+                        {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::submit('Create RAG Status', ['class'=>'btn btn-primary']) !!}
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+
+                <div class="col-md-8">
+                    {{-- Table to display Strategic Drivers from DB --}}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="text-center" scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th class="text-center" scope="col">Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        @if ($rags)
+                            @foreach($rags as $rag)
+                                <tr>
+                                    <td align="center">{{$rag->id}}</td>
+                                    <td>{{$rag->name}}</td>
+                                    <td><a href="{{route('admin.rags.edit', $rag->id)}}" class="btn btn-primary col-sm-6">Edit</a>
+                                        {!! Form::open(['method'=>'DELETE', 'action' => ['AdminRAGsController@destroy', $rag->id ]]) !!}
+                                        {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-6']) !!}
+                                        {!! Form::close() !!} </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            {!! Form::submit('Create RAG Status', ['class'=>'btn-btn-primary']) !!}
-        </div>
-
-        {!! Form::close() !!}
-
-    <br><br>
-
-        <table class="table table-hover">
-
-            <thead>
-            <tr>
-                <th scope="col">RAG Status ID</th>
-                <th scope="col">RAG Status Name</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            @if ($rags)
-
-                @foreach($rags as $rag)
-
-                    <tr>
-                        <td>{{$rag->id}}</td>
-                        <td>{{$rag->name}}</td>
-                        <td><a href="{{route('admin.rags.edit', $rag->id)}}" class="btn btn-success col-sm-12">Edit</a>
-                                {!! Form::open(['method'=>'DELETE', 'action' => ['AdminRAGsController@destroy', $rag->id ]]) !!}
-                                {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
-                                {!! Form::close() !!} </td>
-                    </tr>
-                @endforeach
-            @endif
-
-            </tbody>
-        </table>
-
+    </div>
 @stop

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
+
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
@@ -46,7 +48,7 @@
                                 Portfolio Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('admin.index')}}">Portfolio Dashboard</a>
+                                <a class="dropdown-item" href="{{route('admin.dashboard')}}">Portfolio Dashboard</a>
                                 <a class="dropdown-item" href="{{route('admin.projects.index')}}">All Projects</a>
                                 <a class="dropdown-item" href="{{route('admin.projects.create')}}">Create Project</a>
                             </div>
@@ -83,7 +85,7 @@
 
                 @elseif(Auth::user()->checkAdmin())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.projects.index')}}">Admin</a>
+                        <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
                     </li>
                     <li class="dropdown">
                         <a data-toggle="dropdown" href="#">

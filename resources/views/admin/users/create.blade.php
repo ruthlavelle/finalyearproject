@@ -1,44 +1,46 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
-    {{--Form to create new users in Admin Page --}}
-    <h1>Create New User</h1>
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminUsersController@store']) !!}
+    <!-- White Container in Page -->
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
 
-    {{--Name field which is displayed empty--}}
-    <div class="form-group">
-        {!! Form::label('name', 'Name:') !!}
-        {!! Form::text('name', null, ['class'=>'form-control']) !!}
-    </div>
 
-    {{--Email field which is displayed empty--}}
-    <div class="form-group">
-        {!! Form::label('email', 'Email Address:') !!}
-        {!! Form::email('email', null, ['class'=>'form-control']) !!}
-    </div>
+                <h1 class="font-weight-light">Create a New User</h1>
 
-   {{--Role of user - pulls roles from role table in the database--}}
-    <div class="form-group">
-        {!! Form::label('role_id', 'Role:') !!}
-        {!! Form::select('role_id', [''=> 'Assign Role'] + $roles, null, ['class'=>'form-control']) !!}
-    </div>
+                {{--Form to create new users in Admin Page --}}
+                {!! Form::open(['method'=>'POST', 'action'=>'AdminUsersController@store']) !!}
 
-    {{--Password field --}}
-    <div class="form-group">
-        {!! Form::label('password', 'Password:') !!}
-        {!! Form::password('password', ['class'=>'form-control']) !!}
-    </div>
+                {{--Name field which is displayed empty--}}
+                <div class="form-group">
+                    {!! Form::label('name', 'Name:') !!}
+                    {!! Form::text('name', null, ['class'=>'form-control']) !!}
+                </div>
 
-    {{--}}<div class="form-group">
-        {!! Form::label('is_active', 'Status:') !!}
-        {!! Form::select('is_active', array(0=>'Inactive', 1=>'Active'), null, ['class'=>'form-control']) !!}
-    </div>--}}
+                {{--Email field which is displayed empty--}}
+                <div class="form-group">
+                    {!! Form::label('email', 'Email Address:') !!}
+                    {!! Form::email('email', null, ['class'=>'form-control']) !!}
+                </div>
 
-    {{--Submit button--}}
-    <div class="form-group">
-       {!! Form::submit('Create User', ['class'=>'btn-btn-primary']) !!}
-    </div>
+                {{--Role of user - pulls roles from role table in the database--}}
+                <div class="form-group">
+                    {!! Form::label('role_id', 'Role:') !!}
+                    {!! Form::select('role_id', [''=> ''] + $roles, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
+                </div>
+
+                {{--Password field --}}
+                <div class="form-group">
+                    {!! Form::label('password', 'Password:') !!}
+                    {!! Form::password('password', ['class'=>'form-control']) !!}
+                </div>
+
+                {{--Submit button--}}
+                <div class="form-group" align="center">
+                    {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+                </div>
 
     {!! Form::close() !!}
 
