@@ -52,7 +52,7 @@
                                                 @else
                                                     Not Specified
                                                 @endif
-                                            <td align="center">{{$project->pms->name or "No PM Assigned"}} </td>
+                                            <td align="center">{{$project->project_manager->user->name or "No PM Assigned" }}</td>
                                             <td align="center">{{$project->due_date->format('d-m-Y') }}</td>
                                             <td align="center">€{{$project->spend or "0"}}</td>
 

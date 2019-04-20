@@ -25,13 +25,12 @@ class CreateProjectsTable extends Migration
             $table->integer('department_id')->index();
             $table->integer('RAG_id')->index();
             $table->integer('status_id')->index();
-            $table->integer('PM_id')->index();
+            $table->string('project_manager');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('IT_team_id')->index();
-            $table->integer('priority_id')->index();
             $table->date('closure_date')->index();
-            $table->integer('approval_status')->index()->default(1);
-            $table->integer('stage_id')->index();
+            $table->integer('approval_status')->index()->default(0);
+            $table->integer('priority')->unsigned();
+            $table->longText('update');
 
             $table->timestamps();
 

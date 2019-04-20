@@ -18,6 +18,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/project/{id}', ['as'=>'home.project', 'uses'=>'AdminProjectsController@project']);
+Route::patch('/project/{id}', ['as'=>'home.project', 'uses'=>'AdminProjectsController@status']);
 
 /*
 * Route with middleware to allow only admins to see admin/users page

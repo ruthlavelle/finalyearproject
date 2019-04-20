@@ -1,51 +1,52 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-    <h2 align="center">Project Managers</h2>
-    <br>
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminProjectManagerController@store']) !!}
+                <h1 class="font-weight-light">Project Managers</h1><br>
+
+                <div class="col-md-5">
+
+                {!! Form::open(['method'=>'POST', 'action'=>'AdminProjectManagerController@store']) !!}
+
+                <div class="form-group">
+                    {!! Form::label('user_id', 'Create a Project Manager:') !!}
+                    {!! Form::select('user_id', ['' => 'Choose Project Manager'] + $users, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::submit('Create a Project Manager', ['class'=>'btn btn-primary']) !!}
+                </div>
+
+                {!! Form::close() !!}
+
+                </div>
 
 
-    <div class="form-group">
-        {!! Form::label('user_id', 'Create a Project Manager:') !!}
-        {!! Form::select('user_id', ['' => 'Choose Project Manager'] + $users, null, ['class'=>'form-control']) !!}
+                <div class="col-md-7">
 
-    </div>
-
-
-    <div class="form-group">
-        {!! Form::submit('Create a Project Manager', ['class'=>'btn-btn-primary']) !!}
-    </div>
-
-    {!! Form::close() !!}
-
-    <br>
-
-    <table class="table table-hover">
-
-        @if ($project_managers)
-
-            <thead>
-            <tr>
-                <th scope="col">PM ID</th>
-                <th scope="col">PM Name</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-            @foreach($project_managers as $project_manager)
-
-                <tr>
-                    <td>{{$project_manager->id}}</td>
-                    <td>{{$project_manager->user->name}}</td>
-
-                    {{--}}<td><a href="{{route('admin.departments.edit', $department->id)}}" class="btn btn-success col-sm-12">Update</a>
-                        {!! Form::open(['method'=>'DELETE', 'action' => ['AdminDepartmentsController@destroy', $department->id ]]) !!}
-                        {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
-                        {!! Form::close() !!} </td>--}}
+                    <table class="table table-border">
+                        @if ($project_managers)
+                            <thead>
+                            <tr>
+                                <th scope="col">PM ID</th>
+                                <th scope="col">PM Name</th>
+                                <th class="text-center" scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($project_managers as $project_manager)
+                                <tr>
+                                    <td>{{$project_manager->id}}</td>
+                                    <td>{{$project_manager->user->name}}</td>
+                                    <td align="center">
+                                        {!! Form::open(['method'=>'DELETE', 'action' => ['AdminProjectManagerController@destroy', $project_manager->id ]]) !!}
+                                        {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-12']) !!}
+                                        {!! Form::close() !!}
+                                    </td>
                 </tr>
             @endforeach
 
@@ -55,7 +56,12 @@
     @endif
 
 
-    {{--</div>--}}
+    </div>
+
+            </div>
+        </div>
+    </div>
+
 
 
 @stop

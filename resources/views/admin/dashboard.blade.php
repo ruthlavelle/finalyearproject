@@ -7,17 +7,33 @@
             <div class="card-body p-5">
                 <h1 class="font-weight-light">Portfolio Dashboard</h1>
 
-                <div class="panel panel-default" >
-                    <canvas id="RAGChart" width="100" height="200"></canvas>
+
+                <div id="contain">
+                    <div id="canvas-holder" style="width:50%;float: right;" class="col-xs-6">
+                        <canvas id="RAGChart" width="400" height="450" style=" float:left;margin-left:2em"></canvas></div>
+                    <div id="canvas-holder" style="width:50%;float: right;" class="col-xs-6">
+                        <canvas id="myStatusChart" width="400" height="450" style="float:left;margin-left:2em"></canvas></div>
+                </div>
+
+                <div id="contain">
+                    <div id="canvas-holder" style="width:50%;float: right;" class="col-xs-6">
+                        <canvas id="myDeptChart" width="400" height="450" style=" float:left;margin-left:2em"></canvas></div>
+                    <div id="canvas-holder" style="width:50%;float: right;" class="col-xs-6">
+                        <canvas id="myStatusChart" width="400" height="450" style="float:left;margin-left:2em"></canvas></div>
+                </div>
+
+
+               {{--}} <div class="panel panel-default" >
+                    <canvas id="RAGChart" width=""></canvas>
                 </div>
 
                 <div class="panel panel-default" >
-                    <canvas id="myStatusChart" width="100" height="200"></canvas>
+                    <canvas id="myStatusChart"></canvas>
                 </div>
 
                 <div class="panel panel-default" >
                     <canvas id="myDeptChart" width="100" height="200"></canvas>
-                </div>
+                </div>--}}
 
 
            </div>
@@ -63,14 +79,8 @@
                    display: true,
                    position: 'top',
                    fontSize: 14,
-                   text: 'Project Count by RAG Status',
+                   text: 'Active Projects by RAG Status',
                },
-               plugins: {
-                   datalabels: {
-                       color: '#00000',
-                   }
-               },
-
            }
        });
    </script>
@@ -79,21 +89,23 @@
 
        var ctx = document.getElementById('myStatusChart').getContext('2d');
        var myChart = new Chart(ctx, {
-           type: 'pie',
+           type: 'bar',
            data: {
-               labels: ['Red', 'Amber', 'Green'],
+               labels: ['Active', 'Planned', 'Closed', 'Rejected'],
                datasets: [{
-                   label: 'Projects Count by RAG Status',
-                   data: [{{$redRagCount}}, {{$amberRagCount}}, {{$greenRagCount}}],
+                   label: '# of projects',
+                   data: [{{$activeStatusCount}}, {{$plannedStatusCount}}, {{$closedStatusCount}}, {{$rejectedStatusCount}}],
                    backgroundColor: [
-                       'rgba(255, 0, 0, 1)',
-                       'rgba(231, 165, 0, 1)',
-                       'rgba(0, 128, 0, 1)'
+                       'rgba(255, 99, 132, 0.2)',
+                       'rgba(54, 162, 235, 0.2)',
+                       'rgba(255, 206, 86, 0.2)',
+                       'rgba(75, 192, 192, 0.2)'
                    ],
                    borderColor: [
-                       'rgba(255, 0, 0, 1)',
-                       'rgba(54, 165, 0, 1)',
-                       'rgba(0, 128, 0, 1)'
+                       'rgba(255, 99, 132, 0.2)',
+                       'rgba(54, 162, 235, 0.2)',
+                       'rgba(255, 206, 86, 0.2)',
+                       'rgba(75, 192, 192, 0.2)'
                    ],
                    borderWidth: 1
                }]
@@ -102,20 +114,30 @@
                responsive: true,
                maintainAspectRatio: false,
                legend: {
-                   display: true,
-                   position: 'bottom',
+                   display: false,
                },
                title: {
                    display: true,
                    position: 'top',
                    fontSize: 14,
-                   text: 'Project Count by RAG Status',
+                   text: 'Project Count by Status',
                },
-               plugins: {
-                   datalabels: {
-                       color: '#00000',
-                   }
-               },
+               scales: {
+                   xAxes: [{
+                       gridLines: {
+                           display:false
+                       }
+                   }],
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero: true,
+                           callback: function(value) {if (value % 1 === 0) {return value;}}
+                       },
+                       gridLines: {
+                           display:false
+                       }
+                   }]
+               }
 
            }
        });
@@ -125,18 +147,27 @@
 
        var ctx = document.getElementById('myDeptChart').getContext('2d');
        var myChart = new Chart(ctx, {
-           type: 'pie',
+           type: 'doughnut',
            data: {
-               labels: ['Red', 'Amber', 'Green'],
+               labels: [{{$deptLabels}}],
                datasets: [{
                    label: 'Projects Count by RAG Status',
-                   data: [{{$redRagCount}}, {{$amberRagCount}}, {{$greenRagCount}}],
+                   data: [{{$deptData}}],
                    backgroundColor: [
+                       'rgba(255, 0, 0, 1)',
+                       'rgba(231, 165, 0, 1)',
+                       'rgba(0, 128, 0, 1)',
+                       'rgba(255, 0, 0, 1)',
+                       'rgba(231, 165, 0, 1)',
+                       'rgba(0, 128, 0, 1)',
                        'rgba(255, 0, 0, 1)',
                        'rgba(231, 165, 0, 1)',
                        'rgba(0, 128, 0, 1)'
                    ],
                    borderColor: [
+                       'rgba(255, 0, 0, 1)',
+                       'rgba(54, 165, 0, 1)',
+                       'rgba(0, 128, 0, 1)',
                        'rgba(255, 0, 0, 1)',
                        'rgba(54, 165, 0, 1)',
                        'rgba(0, 128, 0, 1)'

@@ -19,7 +19,8 @@ class Project extends Model
         'department_id',
         'RAG_id',
         'status_id',
-        'PM_id',
+        'project_manager',
+        'update',
         'user_id',
         'IT_team_id',
         'priority_id',
@@ -59,8 +60,5 @@ class Project extends Model
         return $this->hasMany('App\Comment');
     }
 
-    public function project_manager(){
-        return $this->belongsTo('App\ProjectManager', 'PM_id');
-    }
 
 }

@@ -7,7 +7,6 @@ use App\Driver;
 use App\Http\Requests;
 use App\Http\Requests\CreateProjectRequest;
 use App\Project;
-use App\ProjectManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -32,19 +31,12 @@ class HomeController extends Controller
     {
         $projects = Project::all();
 
-        $project_managers = ProjectManager::with('user')->get();
 
         $departments = Department::lists('name', 'id')->all();
 
         $drivers = Driver::lists('name', 'id')->all();
 
-        $pms = [];
-
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
-
-        return view('front.home', compact('projects', 'pms', 'departments', 'drivers'));
+        return view('front.home', compact('projects', 'departments', 'drivers'));
     }
 
     public function create()

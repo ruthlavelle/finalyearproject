@@ -74,6 +74,19 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Project Managers</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">.............................................................................................................................................................................................................................................................</h6>
+                                <p class="card-text">Use the link below to manage Project Managers within the application</p>
+                                <a href="{{route('admin.projectmanager.index')}}" class="card-link">View Project Managers</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 
 

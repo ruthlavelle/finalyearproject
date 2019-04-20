@@ -68,8 +68,8 @@
 
 
             <div class="form-group">
-                {!! Form::label('PM_id', 'Project Manager:') !!}
-                {!! Form::select('PM_id', ['' => 'Choose a PM'] + $pms, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
+                {!! Form::label('project_manager', 'Project Manager:') !!}
+                {!! Form::select('project_manager', ['' => 'Choose a PM'] + $project_managers, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
             </div>
 
             <div class="form-group">
@@ -79,7 +79,7 @@
 
             <div class="form-group">
                 {!! Form::label('due_date', 'Current Delivery Date:') !!}
-                {!! Form::date('due_date', null, ['class'=>'form-control']) !!}
+                {!! Form::date('due_date', (isset($project) && $project->due_date ? $project->due_date : date('Y-m-d')), ['class'=>'form-control']) !!}
             </div>
 
             <div class="form-group">

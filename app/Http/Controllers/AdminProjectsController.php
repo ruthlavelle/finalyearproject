@@ -7,7 +7,6 @@ use App\Driver;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\EditProjectRequest;
 use App\Project;
-use App\ProjectManager;
 use App\RAG;
 use App\Status;
 use App\User;
@@ -30,15 +29,16 @@ class AdminProjectsController extends Controller
         $drivers = Driver::lists('name', 'id')->all();
         $RAG = RAG::lists('name', 'id')->all();
 
-        $project_managers = ProjectManager::with('user')->get();
+        $project_managers = User::where('role_id','3')->lists('name', 'id')->all();
+
 
         $pms = [];
 
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
+       // foreach($project_managers as $pm){
+          //  $pms[$pm->id] = $pm->user->name;
+       // }
 
-        return view('admin.projects.index', compact('projects', 'departments', 'drivers', 'RAG', 'pms'));
+        return view('admin.projects.index', compact('projects', 'departments', 'drivers', 'RAG', 'pms', 'project_managers'));
     }
 
     /**
@@ -65,8 +65,9 @@ class AdminProjectsController extends Controller
 
         $user->project()->create($input);
 
-        return redirect('/admin/projects');
+        return redirect('/home');
     }
+
 
     /**
      * Display the specified resource.
@@ -97,15 +98,10 @@ class AdminProjectsController extends Controller
 
         $departments = Department::lists('name', 'id')->all();
 
-        $project_managers = ProjectManager::with('user')->get();
+        $project_managers = User::where('role_id','3')->pluck('name', 'name')->all();
 
-        $pms = [];
 
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
-
-        return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags', 'pms', 'statuses' ));
+        return view('admin.projects.edit', compact('project', 'drivers', 'departments', 'rags',  'statuses', 'project_managers'));
     }
 
     /**
@@ -123,6 +119,7 @@ class AdminProjectsController extends Controller
 
         return redirect('/admin/projects');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -147,15 +144,16 @@ class AdminProjectsController extends Controller
 
         $comments = $project->comments()->get();
 
-        $project_managers = ProjectManager::with('user')->get();
+        return view('admin.projects.project-home', compact('project', 'users', 'RAG', 'comments'));
+    }
 
-        $pms = [];
+    public function status(Request $request, $id)
+    {
+        $input = $request->all();
 
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
+        Auth::user()->project()->whereId($id)->first()->update($input);
 
-        return view('layouts.project-home', compact('project', 'users', 'RAG', 'comments', 'pms'));
+        return redirect()->back();
     }
 
 
