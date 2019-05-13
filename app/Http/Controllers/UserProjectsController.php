@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Driver;
 use App\Project;
-use App\ProjectManager;
+use App\Status;
 use App\RAG;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,40 +18,24 @@ class UserProjectsController extends Controller
     public function index()
     {
 
-        $project = Project::where('user_id',Auth::user()->id)->get();
+        //Pulls an array of projects with a user_id equal to
+        //the id of the logged in user
+        $project = Project::where('user_id', Auth::user()->id)->orderBy('status_id', 'asc')->get();
 
-        $departments = Department::lists('name', 'id')->all();
+        //Takes name of each status from the database with
+        //its id so that the name can be displayed
+        $statuses = Status::lists('name', 'id')->all();
 
-        $rags = RAG::lists('name', 'id')->all();
-
-        $drivers = Driver::lists('name', 'id')->all();
-
-        $project_managers = ProjectManager::with('user')->get();
-
-        $pms = [];
-
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
-
-        return view('users.projects.index', compact('project', 'pms', 'departments', 'drivers', 'rags'));
+        return view('users.projects.index', compact('project', 'statuses'));
     }
 
     public function approvals()
     {
 
-        $project = Project::where('user_id',Auth::user()->id)->get();
+        //Pulls an array of projects with a user_id equal to
+        //the id of the logged in user
+        $project = Project::where('user_id', Auth::user()->id)->get();
 
-        $rags = RAG::lists('name', 'id');
-
-        $project_managers = ProjectManager::with('user')->get();
-
-        $pms = [];
-
-        foreach($project_managers as $pm){
-            $pms[$pm->id] = $pm->user->name;
-        }
-
-        return view('users.projects.approvals', compact('project', 'pms', 'rags'));
+        return view('users.projects.approvals', compact('project'));
     }
 }

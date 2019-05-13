@@ -36,12 +36,12 @@
                     </li>
 
                     @if(Auth::user()->checkAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.project.approvals')}}">Requests</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.projects.index')}}">Active Projects</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.project.approvals')}}">My Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.projects.index')}}">My Active Projects</a>
+                        </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,13 +54,33 @@
                             </div>
                         </li>
 
-                        @else
-
+                        @elseif(Auth::user()->checkPM())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.project.approvals')}}">Requests</a>
+                            <a class="nav-link" href="{{route('user.project.approvals')}}">My Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.projects.index')}}">Active Projects</a>
+                            <a class="nav-link" href="{{route('user.projects.index')}}">My Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('pm.projects')}}">Project Management</a>
+                        </li>
+
+
+                        @elseif(Auth::user()->checkUser())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.project.approvals')}}">My Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.projects.index')}}">My Projects</a>
+                        </li>
+
+
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.project.approvals')}}">My Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.projects.index')}}">My Projects</a>
                         </li>
 
                     @endif

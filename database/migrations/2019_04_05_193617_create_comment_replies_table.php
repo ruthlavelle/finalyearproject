@@ -7,20 +7,22 @@ class CreateCommentRepliesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('comment_replies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('comment_id')->length(10)->unsigned();
-            $table->integer('is_active')->default(0);
-            $table->string('author');
-            $table->string('email');
             $table->text('body');
+
+            //Stores the id of the logged in user
+            $table->string('author');
+
+            //Stores the id of the comment this reply is made about
+            $table->integer('comment_id')->length(10)->unsigned();
             $table->timestamps();
 
+            //If the comment this reply is associated with deletes
+            //Delete all replies
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }

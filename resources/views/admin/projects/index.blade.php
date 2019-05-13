@@ -26,7 +26,7 @@
                             <thead>
                             <tr>
                                 <th class="text-center" scope="col">ID</th>
-                                <th class="text-center" scope="col">Name</th>
+                                <th scope="col">Name</th>
                                 <th class="text-center" scope="col">RAG Status</th>
                                 <th class="text-center" scope="col">Project Manager</th>
                                 <th class="text-center" scope="col">Due Date</th>
@@ -42,7 +42,7 @@
                                     <tr>
                                         @if($project->approval_status == 1 && $project->status_id == 1)
                                             <td align="center">{{$project->id}}</td>
-                                            <td align="center">{{$project->name}}</td>
+                                            <td>{{$project->name}}</td>
                                             <td align="center">@if($project->RAG_id == 1)
                                                     <img class="img-fluid-2" src="/images/RedSquare.jpg" alt="">
                                                 @elseif($project->RAG_id == 2)
@@ -52,7 +52,8 @@
                                                 @else
                                                     Not Specified
                                                 @endif
-                                            <td align="center">{{$project->project_manager->user->name or "No PM Assigned" }}</td>
+                                            </td>
+                                            <td align="center">{{$project->project_manager or "No PM Assigned" }}</td>
                                             <td align="center">{{$project->due_date->format('d-m-Y') }}</td>
                                             <td align="center">€{{$project->spend or "0"}}</td>
 
@@ -75,13 +76,13 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Cost</th>
+                                <th class="text-center scope="col">Cost</th>
                                 <th scope="col">Benefits</th>
-                                <th scope="col">Driver</th>
-                                <th scope="col">ROI</th>
-                                <th scope="col">Dept</th>
-                                <th scope="col">Expected Delivery</th>
-                                <th scope="col">Actions</th>
+                                <th class="text-center scope="col">Driver</th>
+                                <th class="text-center scope="col">ROI</th>
+                                <th class="text-center scope="col">Dept</th>
+                                <th class="text-center" scope="col">Expected Delivery</th>
+                                <th class="text-center col-xs-3" scope="col">Actions</th>
                             </tr>
                             </thead>
 
@@ -92,24 +93,30 @@
                                         @if($project->approval_status == 0)
                                             <td>{{$project->name}}</td>
                                             <td>{{$project->description}}</td>
-                                            <td>€{{$project->cost}}</td>
+                                            <td align="center">€{{$project->cost}}</td>
                                             <td>{{$project->benefits}}</td>
-                                            <td>{{$project->driver ? $project->driver->name: "Strategic Driver not assigned"}}</td>
-                                            <td>{{$project->ROI}}</td>
-                                            <td>{{$project->department ? $project->department->name : "Department not assigned"}}</td>
-                                            <td>{{$project->due_date->format('m-Y')}}</td>
-                                            <td>
-                                                {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
-                                                <input type="hidden" name="approval_status" value="1">
-                                                <input type="hidden" name="status_id" value="2">
-                                                {!! Form::submit('Approve', ['class'=>'btn btn-success col-sm-11']) !!}
-                                                {!! Form::close() !!}
-                                                {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
-                                                <input type="hidden" name="approval_status" value="2">
-                                                <input type="hidden" name="status_id" value="4">
-                                                {!! Form::submit('Reject', ['class'=>'btn btn-danger col-sm-11']) !!}
-                                                {!! Form::close() !!}
-                                                </td>
+                                            <td align="center">{{$project->driver ? $project->driver->name: "Strategic Driver not assigned"}}</td>
+                                            <td align="center">€{{$project->ROI}}</td>
+                                            <td align="center">{{$project->department ? $project->department->name : "Department not assigned"}}</td>
+                                            <td align="center">{{$project->due_date->format('m-Y')}}</td>
+                                            <td align="center">
+                                                <div class="btn-group btn-group-justified" align="center">
+                                                    <div class="btn-group">
+                                                        {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
+                                                        <input type="hidden" name="approval_status" value="1">
+                                                        <input type="hidden" name="status_id" value="2">
+                                                        {!! Form::submit('Approve', ['class'=>'btn btn-success']) !!}
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                    <div class="btn-group">
+                                                        {!! Form::open(['method'=>'PATCH', 'action'=>['AdminProjectsController@update', $project->id]]) !!}
+                                                        <input type="hidden" name="approval_status" value="2">
+                                                        <input type="hidden" name="status_id" value="4">
+                                                        {!! Form::submit('Reject', ['class'=>'btn btn-danger']) !!}
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach
@@ -169,7 +176,6 @@
                                 <th scope="col">Driver</th>
                                 <th scope="col">ROI</th>
                                 <th scope="col">Dept</th>
-                                <th scope="col">Expected Delivery</th>
                             </tr>
                             </thead>
 
@@ -183,9 +189,8 @@
                                             <td>€{{$project->cost}}</td>
                                             <td>{{$project->benefits}}</td>
                                             <td>{{$project->driver ? $project->driver->name: "Strategic Driver not assigned"}}</td>
-                                            <td>{{$project->ROI}}</td>
+                                            <td>€{{$project->ROI}}</td>
                                             <td>{{$project->department ? $project->department->name : "Department not assigned"}}</td>
-                                            <td>{{$project->due_date->format('m-Y') }} </td>
                                         @endif
                                     </tr>
                                 @endforeach

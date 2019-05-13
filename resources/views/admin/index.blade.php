@@ -48,49 +48,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">RAG Statuses</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">.............................................................................................................................................................................................................................................................</h6>
-                                <p class="card-text">Use the links below to manage project RAG statuses drivers within the application</p>
-                                <a href="{{route('admin.rags.index')}}" class="card-link">View RAG Statuses</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Project Statuses</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">.............................................................................................................................................................................................................................................................</h6>
-                                <p class="card-text">Use the link below to manage project statuses within the application</p>
-                                <a href="{{route('admin.status.index')}}" class="card-link">View Project Statuses</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Project Managers</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">.............................................................................................................................................................................................................................................................</h6>
-                                <p class="card-text">Use the link below to manage Project Managers within the application</p>
-                                <a href="{{route('admin.projectmanager.index')}}" class="card-link">View Project Managers</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
             </div>
         </div>
     </div>

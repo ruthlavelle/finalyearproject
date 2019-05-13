@@ -18,12 +18,6 @@
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
 
-                {{-- Update Department Manager, displays current manager --}}
-                <div class="form-group">
-                    {!! Form::label('user_id', 'Department Manager:') !!}
-                    {!! Form::select('user_id', ['' => ''] + $users, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
-                </div>
-
                 <div class="form-group" align="center">
                     {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
                 </div>

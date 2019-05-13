@@ -46,7 +46,7 @@
                     {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
                 </div>
 
-    {!! Form::close() !!}
+                {!! Form::close() !!}
 
     {{--Display form error to the user if there is one. Code is pulled from Views/includes/form_error--}}
     @include('includes.form_error')

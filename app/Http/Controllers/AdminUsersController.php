@@ -49,16 +49,6 @@ class AdminUsersController extends Controller
         return redirect('/admin/users');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -113,7 +103,4 @@ class AdminUsersController extends Controller
         return redirect('/admin/users');
     }
 
-    public function scopeProjectmanager($query){
-        return $query->where('role_id', '=', '2');
-    }
 }

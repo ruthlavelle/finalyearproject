@@ -6,7 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    /**
+     * Name of the users table in the database
+     * which is associated with this model
+     */
     protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      */
@@ -15,27 +20,28 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden from arrays.
      */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
+    /*
+     * Relationship to the roles table in the database
+     */
     public function role(){
         return $this->belongsTo('App\Role');
     }
 
+    /*
+     * Relationship to the projects table
+     */
     public function project(){
        return $this->hasMany('App\Project');
     }
 
-    public function project_manager(){
-        return $this->belongsTo('App\ProjectManager');
-    }
-
-
     /**
-     * Function to detect if user is an admin
+     * Method to detect if user role is admin
      */
     public function checkAdmin(){
 
@@ -48,9 +54,32 @@ class User extends Authenticatable
 
     }
 
-    public function hasRole($role)
+    /*
+     * Method to detect if user role is User
+     */
+    public function checkUser()
     {
-        return $this->user->role_id == $role;
+        if($this->role->name == "User" && $this->is_active == 1){
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /*
+     * Method to detect if user role is project manager
+     */
+    public function checkPM()
+    {
+        if($this->role->name == "Project Manager" && $this->is_active == 1){
+
+            return true;
+        }
+
+        return false;
+
     }
 
 }

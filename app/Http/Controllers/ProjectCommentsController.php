@@ -10,70 +10,31 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectCommentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin.comments.index');
-    }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Stores Comments to the Database
      */
     public function store(Request $request)
     {
+        //Get the logged in user
         $user = Auth::user();
 
+        //Capture information about the comment and store
+        //it to an array called $data
         $data = [
 
             'project_id' => $request->project_id,
-            'author' => $user->name,
-            'email' => $user->email,
+            'author' => $user->name, //logged in user's name
             'body' => $request->body
         ];
 
+        //create a comment with information in $data
         Comment::create($data);
 
+        //Redirect user to the screen they were on
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

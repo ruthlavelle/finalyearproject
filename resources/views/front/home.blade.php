@@ -48,7 +48,7 @@
                             <a href="{{route('user.projects.index')}}">
                                 <img src="images/Active.jpg" alt="" style="width:20%">
                                 <div class="caption">
-                                    <p>View My Active Projects</p>
+                                    <p>View My Projects</p>
                                 </div>
                             </a>
                         </div>

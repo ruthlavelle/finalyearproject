@@ -5,13 +5,16 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class PM
 {
     /**
      * Handle an incoming request.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-   public function handle($request, Closure $next)
+    public function handle($request, Closure $next)
     {
         /**
          * Check if there is a user logged in
@@ -21,13 +24,13 @@ class Admin
             /*
              * Check if user is an admin using checkAdmin function from User.php
              */
-           if(Auth::user()->checkAdmin()){
+            if(Auth::user()->checkPM()){
 
-               return $next($request);
+                return $next($request);
 
-           }
+            }
         }
 
-       return redirect('/');
+        return redirect('/');
     }
 }

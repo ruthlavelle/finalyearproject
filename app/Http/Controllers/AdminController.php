@@ -17,6 +17,7 @@ class AdminController extends Controller
 
     public function dashboard(){
 
+        //count the number of active projects with each RAG status
         $redRagCount = Project::where([
             ['RAG_id', '=', '1'],
             ['status_id', '=', '1'],
@@ -30,14 +31,13 @@ class AdminController extends Controller
             ['status_id', '=', '1'],
         ])->count();;
 
+        //count the number of projects in each status
         $activeStatusCount = Project::where('status_id', '=', '1')->count();
         $plannedStatusCount = Project::where('status_id', '=', '2')->count();
         $closedStatusCount = Project::where('status_id', '=', '3')->count();
         $rejectedStatusCount = Project::where('status_id', '=', '4')->count();
 
-
-
-
-        return view('admin/dashboard', compact('redRagCount', 'amberRagCount', 'greenRagCount', 'activeStatusCount', 'plannedStatusCount', 'closedStatusCount', 'rejectedStatusCount', 'deptLabels', 'deptData'));
+        //return the dashboard view
+        return view('admin/dashboard', compact('redRagCount', 'amberRagCount', 'greenRagCount', 'activeStatusCount', 'plannedStatusCount', 'closedStatusCount', 'rejectedStatusCount'));
     }
 }

@@ -18,12 +18,6 @@
                     {!! Form::text('name', null, ['class'=>'form-control']) !!}
                 </div>
 
-                {{--Department Manager Field - Pulls From Users table --}}
-                <div class="form-group">
-                    {!! Form::label('user_id', 'Department Manager:') !!}
-                    {!! Form::select('user_id', ['' => 'Choose Department Manager'] + $users, null, ['class'=>'form-control', 'style'=>'height: 30px;']) !!}
-                </div>
-
                 <div class="form-group">
                     {!! Form::submit('Create Business Department', ['class'=>'btn btn-primary']) !!}
                 </div>
@@ -42,7 +36,6 @@
                         <tr>
                             <th class="text-center" scope="col">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Manager</th>
                             <th class="text-center" scope="col">Actions</th>
                         </tr>
                         </thead>
@@ -55,10 +48,9 @@
                             <tr>
                                 <td align="center">{{$department->id}}</td>
                                 <td>{{$department->name}}</td>
-                                <td>{{$department->user ? $department->user->name: "No Manager Assigned"}}</td>
-                                <td align="center"><a href="{{route('admin.departments.edit', $department->id)}}" class="btn btn-primary col-sm-6">Edit</a>
+                                <td align="center"><a href="{{route('admin.departments.edit', $department->id)}}" class="btn btn-primary col-sm-5">Edit</a>
                                     {!! Form::open(['method'=>'DELETE', 'action' => ['AdminDepartmentsController@destroy', $department->id ]]) !!}
-                                    {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-6']) !!}
+                                    {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-5']) !!}
                                     {!! Form::close() !!} </td>
                             </tr>
                         @endforeach

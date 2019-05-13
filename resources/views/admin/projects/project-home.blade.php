@@ -62,19 +62,41 @@
                 </div>
 
                 <div class="col-md-10">
-                    <h5><b>Post an Update</b></h5>
-                    {!! Form::model($project, ['method'=>'PATCH', 'action'=>['AdminProjectsController@status', $project->id]]) !!}
-                    {!! Form::textarea('update', null, ['class'=>'form-control', 'rows'=>3]) !!}
-                    <br>
-                    <div class="btn-group btn-group-justified" align="center">
-                        <div class="btn-group">
-                            {!! Form::submit('Submit Update', ['class'=>'btn btn-primary'])  !!}
-                            {!! Form::close()!!}
-                        </div>
-                        <div class="btn-group">
+                    @if(Auth::user()->checkAdmin())
+                        <h5><b>Post an Update</b></h5>
+                        {!! Form::model($project, ['method'=>'PATCH', 'action'=>['AdminProjectsController@status', $project->id]]) !!}
+                        {!! Form::textarea('update', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                        <br>
+                        <div class="btn-group btn-group-justified" align="center">
+                            <div class="btn-group">
+                                {!! Form::submit('Submit Update', ['class'=>'btn btn-primary'])  !!}
+                                {!! Form::close()!!}
+                            </div>
+
+                            <div class="btn-group">
                             <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-primary">Amend Project Details</a>
+                            </div>
                         </div>
-                    </div>
+                    @elseif(Auth::user()->checkPM())
+                        <h5><b>Post an Update</b></h5>
+                        {!! Form::model($project, ['method'=>'PATCH', 'action'=>['AdminProjectsController@status', $project->id]]) !!}
+                        {!! Form::textarea('update', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                        <br>
+                        <div class="btn-group btn-group-justified" align="center">
+                            <div class="btn-group">
+                                {!! Form::submit('Submit Update', ['class'=>'btn btn-primary'])  !!}
+                                {!! Form::close()!!}
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{route('projectmanager.projects.edit', $project->id)}}" class="btn btn-primary">Amend Project Details</a>
+                            </div>
+                        </div>
+                    @else
+                        <h5><b>Latest Updates:</b></h5>
+                        {!! Form::model($project, ['method'=>'PATCH', 'action'=>['AdminProjectsController@status', $project->id]]) !!}
+                        {!! Form::textarea('update', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                        {!! Form::close()!!}
+                    @endif
                 </div>
             </div>
 
@@ -88,11 +110,11 @@
                 <div class="col-md-12 comments-section">
 
                     <!-- comment form -->
-                    <h5>Ask a Question:</h5>
+                    <h5 align="center"><b>Collaboration Space</b></h5>
                     {!!  Form::open(['method'=>'POST', 'action'=>'ProjectCommentsController@store']) !!}
                     <input type="hidden" name="project_id" value="{{$project->id}}">
                     {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>3]) !!}
-                    {!! Form::submit('Submit Comment', ['class'=>'btn btn-primary btn-sm pull-right'])  !!}
+                    {!! Form::submit('Submit', ['class'=>'btn btn-primary btn-sm pull-right'])  !!}
                     {!! Form::close()!!}
 
                     <!-- Display total number of comments on this post  -->
@@ -150,6 +172,7 @@
 
     <script>$(".comment-details .reply-btn").click(function(){
             $(this).next().slideToggle("slow");
+            return false //stops the page scrolling to top on click
             });
     </script>
 @stop

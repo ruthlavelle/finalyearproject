@@ -37,7 +37,7 @@
                 {{--Return on Investment Field --}}
                 <div class="form-group">
                     {!! Form::label('ROI', 'Expected Return on Investment:') !!}
-                    {!! Form::text('ROI',null, ['class'=>'form-control']) !!}
+                    {!! Form::text('ROI',null, ['class'=>'form-control', 'number_format']) !!}
                 </div>
 
                 {{--Strategic Driver Field - can select from Strategic Driver Table--}}

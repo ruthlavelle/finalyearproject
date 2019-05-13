@@ -149,10 +149,10 @@
        var myChart = new Chart(ctx, {
            type: 'doughnut',
            data: {
-               labels: [{{$deptLabels}}],
+               labels: [],
                datasets: [{
                    label: 'Projects Count by RAG Status',
-                   data: [{{$deptData}}],
+                   data: [],
                    backgroundColor: [
                        'rgba(255, 0, 0, 1)',
                        'rgba(231, 165, 0, 1)',

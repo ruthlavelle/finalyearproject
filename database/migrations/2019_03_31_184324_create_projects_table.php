@@ -7,8 +7,6 @@ class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -29,7 +27,6 @@ class CreateProjectsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->date('closure_date')->index();
             $table->integer('approval_status')->index()->default(0);
-            $table->integer('priority')->unsigned();
             $table->longText('update');
 
             $table->timestamps();

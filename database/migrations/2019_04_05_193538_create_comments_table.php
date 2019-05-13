@@ -7,20 +7,22 @@ class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('project_id')->length(10)->unsigned();
-            $table->integer('is_active')->default(0);
-            $table->string('author');
-            $table->string('email');
             $table->text('body');
+
+            //Stores the id of the logged in user
+            $table->string('author');
+
+            //Stores the id of the project this comment is left on
+            $table->integer('project_id')->length(10)->unsigned();
             $table->timestamps();
 
+            //Deletes all comments associated with a project if the project
+            // is deleted
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
         });

@@ -31,14 +31,7 @@ class AdminProjectsController extends Controller
 
         $project_managers = User::where('role_id','3')->lists('name', 'id')->all();
 
-
-        $pms = [];
-
-       // foreach($project_managers as $pm){
-          //  $pms[$pm->id] = $pm->user->name;
-       // }
-
-        return view('admin.projects.index', compact('projects', 'departments', 'drivers', 'RAG', 'pms', 'project_managers'));
+        return view('admin.projects.index', compact('projects', 'departments', 'drivers', 'RAG', 'project_managers'));
     }
 
     /**
@@ -65,7 +58,20 @@ class AdminProjectsController extends Controller
 
         $user->project()->create($input);
 
-        return redirect('/home');
+        //If the user is an administrator
+        //Redirect to the admin projects index page
+        if($user->role_id == 1) {
+            return redirect('/admin/projects');
+        }
+
+        //For any other type of user, redirect to a list of
+        //the user's project requests
+        else {
+            return redirect('/users/projects/approvals');
+        }
+
+
+
     }
 
 
@@ -113,9 +119,11 @@ class AdminProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $project = Project::findOrFail($id);
+
         $input = $request->all();
 
-        Auth::user()->project()->whereId($id)->first()->update($input);
+        $project->update($input);
 
         return redirect('/admin/projects');
     }
@@ -136,23 +144,36 @@ class AdminProjectsController extends Controller
 
     public function project($id){
 
+        //Pulls an array of information with the $id of the project
+        //from the projects table
         $project = Project::findOrFail($id);
 
+        //Pulls an an array of users from the users table
         $users = User::lists('name', 'id')->all();
 
+        //Pulls an array of RAGs from the RAGs table
         $RAG = RAG::lists('name', 'id')->all();
 
+        //Pulls an array of comments from the comments table
         $comments = $project->comments()->get();
 
+        //returns the 'project-home' view to the user and passes the arrays above
         return view('admin.projects.project-home', compact('project', 'users', 'RAG', 'comments'));
     }
 
+    //Stores status updates to the database for projects
     public function status(Request $request, $id)
     {
+        //Find the project with a particular id
+        $project = Project::findOrFail($id);
+
+        //store data in $input
         $input = $request->all();
 
-        Auth::user()->project()->whereId($id)->first()->update($input);
+        //update project with the data in input
+        $project->update($input);
 
+        //Redirect back to the page the user was on
         return redirect()->back();
     }
 
